@@ -4,185 +4,431 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fuse 2026 — Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       min-height: 100vh;
-      background: #0a0e1a;
-      font-family: Georgia, 'Times New Roman', serif;
-      color: #fff;
+      background: #1a120b;
+      font-family: 'Inter', sans-serif;
+      color: #f5e6d3;
       padding-bottom: 100px;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 0%, rgba(180,100,30,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(180,100,30,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Leather texture overlay */
+    .leather-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a574' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* HEADER */
     .header {
-      border-bottom: 1px solid #1e2a3a;
+      border-bottom: 1px solid #3d2b1a;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, #1a120b 0%, #1a120bcc 100%);
+    }
+    .header-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 32px 24px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-area { display: flex; align-items: center; gap: 14px; }
+    .logo-fuse {
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      color: #f5e6d3;
+      line-height: 1;
+      position: relative;
+    }
+    .logo-year {
+      font-size: 13px;
+      letter-spacing: 0.35em;
+      color: #c8843a;
+      font-weight: 700;
+      padding: 3px 8px;
+      border: 1px solid #c8843a44;
+      border-radius: 3px;
+    }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .header-city {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #8b7355;
+    }
+
+    /* Longhorn SVG divider */
+    .header-accent {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
       overflow: hidden;
     }
-    .header-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 36px 24px 28px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+    .header-accent::before, .header-accent::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #5a3a1a, transparent);
     }
-    .logo-area { display: flex; align-items: baseline; gap: 10px; }
-    .logo-fuse { font-size: 42px; font-weight: 700; letter-spacing: 0.18em; color: #fff; line-height: 1; }
-    .logo-year { font-size: 16px; letter-spacing: 0.3em; color: #e07b2a; font-family: sans-serif; }
-    .header-city { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: #6b7a8d; font-family: sans-serif; }
-    .header-accent { height: 3px; background: linear-gradient(90deg, #e07b2a 0%, #f5a623 40%, transparent 100%); }
+    .longhorn-icon {
+      margin: 0 16px;
+      color: #c8843a;
+      flex-shrink: 0;
+    }
+
+    /* Star decorations */
+    .star-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 8px 0;
+      color: #5a3a1a;
+      font-size: 8px;
+      letter-spacing: 6px;
+    }
 
     /* PROGRESS */
     .progress-bar {
-      max-width: 680px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: 28px 24px 8px;
+      padding: 24px 24px 8px;
       display: flex;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
     .progress-step { display: flex; align-items: center; gap: 8px; flex: 1; }
     .progress-dot {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: #1e2a3a; border: 2px solid #2e3d50;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #2a1d10; border: 2px solid #3d2b1a;
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: #6b7a8d; font-family: sans-serif;
-      flex-shrink: 0; transition: all 0.2s;
+      font-size: 11px; color: #8b7355; font-weight: 600;
+      flex-shrink: 0; transition: all 0.3s;
     }
-    .progress-dot.active { background: #e07b2a; border-color: #e07b2a; color: #fff; }
-    .progress-dot.done { background: #1a3a28; border-color: #2d6a47; color: #4ade80; }
-    .progress-label { font-size: 11px; letter-spacing: 0.08em; color: #4a5568; font-family: sans-serif; text-transform: uppercase; white-space: nowrap; }
-    .progress-label.active { color: #e07b2a; }
-    .progress-line { flex: 1; height: 1px; background: #1e2a3a; margin-left: 8px; }
-    .progress-line.done { background: #2d6a47; }
+    .progress-dot.active {
+      background: linear-gradient(135deg, #c8843a, #e09b4a);
+      border-color: #c8843a;
+      color: #fff;
+      box-shadow: 0 0 16px #c8843a44;
+    }
+    .progress-dot.done { background: #2a3d20; border-color: #4a7a3a; color: #7abe6a; }
+    .progress-label { font-size: 11px; letter-spacing: 0.1em; color: #6b5740; text-transform: uppercase; white-space: nowrap; font-weight: 500; }
+    .progress-label.active { color: #c8843a; }
+    .progress-line { flex: 1; height: 1px; background: #3d2b1a; margin-left: 8px; }
+    .progress-line.done { background: #4a7a3a; }
 
     /* CONTAINER & CARD */
-    .container { max-width: 680px; margin: 0 auto; padding: 20px 24px; }
-    .card { background: #0f1520; border: 1px solid #1e2a3a; border-radius: 12px; padding: 36px 40px; }
-    .card-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
-    .card-subtitle { font-size: 13px; color: #6b7a8d; margin-bottom: 28px; font-family: sans-serif; }
+    .container { max-width: 700px; margin: 0 auto; padding: 20px 24px; position: relative; z-index: 1; }
+    .card {
+      background: linear-gradient(180deg, #231810 0%, #1e150e 100%);
+      border: 1px solid #3d2b1a;
+      border-radius: 12px;
+      padding: 36px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #c8843a, #e09b4a, #c8843a, transparent);
+    }
+    /* Corner brand accents */
+    .card::after {
+      content: '✦';
+      position: absolute;
+      top: 14px; right: 18px;
+      color: #3d2b1a;
+      font-size: 12px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #f5e6d3;
+    }
+    .card-subtitle { font-size: 13px; color: #8b7355; margin-bottom: 28px; }
 
     /* FIELDS */
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .field { margin-bottom: 18px; }
-    .field label { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8899aa; margin-bottom: 7px; font-family: sans-serif; }
-    .field label .req { color: #e07b2a; }
-    .field label .hint { color: #4a5568; text-transform: none; letter-spacing: 0; font-style: italic; }
-    .field input, .field select {
-      width: 100%; background: #141e2e; border: 1px solid #2a3a4e;
-      border-radius: 6px; padding: 11px 14px; color: #e8f0f8;
-      font-size: 14px; font-family: sans-serif; outline: none;
-      transition: border-color 0.15s;
+    .field label {
+      display: block; font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #a08968; margin-bottom: 7px;
+      font-weight: 600;
     }
-    .field input:focus, .field select:focus { border-color: #e07b2a; }
+    .field label .req { color: #c8843a; }
+    .field label .hint { color: #6b5740; text-transform: none; letter-spacing: 0; font-style: italic; font-weight: 400; }
+    .field input, .field select {
+      width: 100%;
+      background: #1a120b;
+      border: 1px solid #3d2b1a;
+      border-radius: 6px;
+      padding: 11px 14px;
+      color: #f5e6d3;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input:focus, .field select:focus {
+      border-color: #c8843a;
+      box-shadow: 0 0 0 3px #c8843a22;
+    }
+    .field input::placeholder { color: #5a4530; }
     .field select {
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7a8d'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b7355'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 12px center;
-      background-color: #141e2e;
+      background-color: #1a120b;
       padding-right: 32px; cursor: pointer;
     }
-    .field input.error, .field select.error { border-color: #c0392b; }
-    .error-text { display: block; font-size: 11px; color: #e05050; margin-top: 4px; font-family: sans-serif; }
-    .error-banner { background: #2a1010; border: 1px solid #5a1a1a; color: #e07070; border-radius: 6px; padding: 10px 14px; font-size: 13px; font-family: sans-serif; margin-bottom: 16px; }
+    .field select option { background: #1a120b; color: #f5e6d3; }
+    .field input.error, .field select.error { border-color: #a03020; box-shadow: 0 0 0 3px #a0302022; }
+    .error-text { display: block; font-size: 11px; color: #d05040; margin-top: 4px; }
+    .error-banner { background: #2a1510; border: 1px solid #5a2a1a; color: #d07060; border-radius: 6px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
 
     /* BUTTONS */
     .btn-primary {
-      width: 100%; background: linear-gradient(135deg, #e07b2a, #f5a623);
-      color: #fff; border: none; border-radius: 7px; padding: 14px 24px;
-      font-size: 14px; font-family: sans-serif; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
-      margin-top: 12px; transition: opacity 0.15s;
+      width: 100%;
+      background: linear-gradient(135deg, #b8722e, #c8843a, #d89a4a);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 14px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
     }
-    .btn-primary:hover { opacity: 0.9; }
+    .btn-primary:hover { filter: brightness(1.1); box-shadow: 0 4px 20px #c8843a44; }
     .btn-back {
-      background: transparent; color: #6b7a8d; border: 1px solid #2a3a4e;
-      border-radius: 7px; padding: 14px 24px; font-size: 13px;
-      font-family: sans-serif; cursor: pointer; transition: border-color 0.15s;
+      background: transparent;
+      color: #8b7355;
+      border: 1px solid #3d2b1a;
+      border-radius: 7px;
+      padding: 14px 24px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
     }
-    .btn-back:hover { border-color: #4a5a6e; color: #8899aa; }
+    .btn-back:hover { border-color: #5a3a1a; color: #c8a060; }
     .btn-submit {
-      flex: 1; background: linear-gradient(135deg, #2d6a47, #1a9a5c);
-      color: #fff; border: none; border-radius: 7px; padding: 14px 24px;
-      font-size: 14px; font-family: sans-serif; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
-      transition: opacity 0.15s;
+      flex: 1;
+      background: linear-gradient(135deg, #3a6a2a, #4a8a3a);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 14px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
     }
-    .btn-submit:hover { opacity: 0.9; }
+    .btn-submit:hover { filter: brightness(1.1); box-shadow: 0 4px 20px #4a8a3a44; }
     .nav-row { display: flex; gap: 12px; margin-top: 12px; align-items: center; }
 
     /* TICKETS */
     .ticket-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
     .ticket-card {
-      background: #141e2e; border: 2px solid #1e2a3a; border-radius: 10px;
-      padding: 20px 18px; cursor: pointer; transition: all 0.15s;
+      background: #1a120b;
+      border: 2px solid #3d2b1a;
+      border-radius: 10px;
+      padding: 22px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
     }
-    .ticket-card:hover { border-color: #3a4a5e; }
-    .ticket-card.selected { border-color: #e07b2a; background: #1a1808; }
-    .ticket-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .ticket-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #3a4a5e; display: flex; align-items: center; justify-content: center; }
-    .ticket-radio-inner { width: 8px; height: 8px; border-radius: 50%; background: transparent; transition: background 0.15s; }
-    .ticket-card.selected .ticket-radio-inner { background: #e07b2a; }
-    .popular-badge { font-size: 9px; letter-spacing: 0.15em; color: #e07b2a; font-family: sans-serif; font-weight: 700; text-transform: uppercase; border: 1px solid #e07b2a; padding: 2px 6px; border-radius: 3px; }
-    .ticket-price { font-size: 28px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; }
-    .ticket-name { font-size: 13px; font-weight: 600; color: #c8d8e8; margin-bottom: 8px; font-family: sans-serif; }
-    .ticket-desc { font-size: 11px; color: #5a6a7a; font-family: sans-serif; line-height: 1.5; }
+    .ticket-card:hover { border-color: #5a3a1a; }
+    .ticket-card.selected {
+      border-color: #c8843a;
+      background: linear-gradient(135deg, #2a1d10, #251a0e);
+      box-shadow: 0 0 24px #c8843a18;
+    }
+    .ticket-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .ticket-radio {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid #5a3a1a;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .ticket-card.selected .ticket-radio { border-color: #c8843a; }
+    .ticket-radio-inner {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: transparent; transition: background 0.2s;
+    }
+    .ticket-card.selected .ticket-radio-inner { background: #c8843a; }
+    .popular-badge {
+      font-size: 9px; letter-spacing: 0.15em; color: #c8843a;
+      font-weight: 700; text-transform: uppercase;
+      border: 1px solid #c8843a55; padding: 2px 8px; border-radius: 3px;
+      background: #c8843a11;
+    }
+    .ticket-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; font-weight: 700; margin-bottom: 4px;
+      color: #f5e6d3;
+    }
+    .ticket-name { font-size: 13px; font-weight: 600; color: #c8a060; margin-bottom: 8px; }
+    .ticket-desc { font-size: 11px; color: #7a6548; line-height: 1.5; }
 
     /* ADDONS */
-    .addon-section { border-top: 1px solid #1e2a3a; padding-top: 24px; }
-    .addon-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .addon-subtitle { font-size: 12px; color: #6b7a8d; font-family: sans-serif; margin-bottom: 16px; }
+    .addon-section { border-top: 1px solid #3d2b1a; padding-top: 24px; }
+    .addon-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 700; margin-bottom: 4px;
+    }
+    .addon-subtitle { font-size: 12px; color: #8b7355; margin-bottom: 16px; }
     .addon-card {
       display: flex; align-items: center; gap: 14px;
-      background: #141e2e; border: 2px solid #1e2a3a; border-radius: 8px;
-      padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s;
+      background: #1a120b; border: 2px solid #3d2b1a; border-radius: 8px;
+      padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
     }
-    .addon-card:hover:not(.locked) { border-color: #3a4a5e; }
-    .addon-card.selected { border-color: #e07b2a; background: #1a1808; }
-    .addon-card.locked { opacity: 0.4; cursor: not-allowed; }
+    .addon-card:hover:not(.locked) { border-color: #5a3a1a; }
+    .addon-card.selected { border-color: #c8843a; background: #2a1d10; }
+    .addon-card.locked { opacity: 0.35; cursor: not-allowed; }
     .addon-check { flex-shrink: 0; }
-    .checkmark { width: 20px; height: 20px; background: #e07b2a; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 700; font-family: sans-serif; }
-    .check-empty { width: 20px; height: 20px; border: 2px solid #2a3a4e; border-radius: 4px; }
+    .checkmark {
+      width: 20px; height: 20px;
+      background: linear-gradient(135deg, #b8722e, #c8843a);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; font-weight: 700;
+    }
+    .check-empty { width: 20px; height: 20px; border: 2px solid #3d2b1a; border-radius: 4px; }
     .addon-info { flex: 1; }
-    .addon-name { font-size: 13px; font-weight: 600; color: #d8e8f8; font-family: sans-serif; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .women-badge { font-size: 9px; letter-spacing: 0.1em; color: #c47ab8; font-family: sans-serif; font-weight: 700; text-transform: uppercase; border: 1px solid #c47ab8; padding: 2px 5px; border-radius: 3px; }
-    .addon-desc { font-size: 11px; color: #5a6a7a; font-family: sans-serif; line-height: 1.4; }
-    .addon-price { flex-shrink: 0; font-size: 15px; font-weight: 700; color: #fff; font-family: sans-serif; }
-    .addon-price.locked-price { font-size: 11px; color: #5a6a7a; }
+    .addon-name {
+      font-size: 13px; font-weight: 600; color: #e0c8a0; margin-bottom: 2px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .women-badge {
+      font-size: 9px; letter-spacing: 0.1em; color: #c47ab8;
+      font-weight: 700; text-transform: uppercase;
+      border: 1px solid #c47ab855; padding: 2px 5px; border-radius: 3px;
+      background: #c47ab811;
+    }
+    .addon-desc { font-size: 11px; color: #7a6548; line-height: 1.4; }
+    .addon-price { flex-shrink: 0; font-size: 15px; font-weight: 700; color: #f5e6d3; }
+    .addon-price.locked-price { font-size: 11px; color: #5a4530; }
 
     /* REVIEW */
-    .review-section { background: #141e2e; border: 1px solid #1e2a3a; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; }
-    .review-header { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b7a8d; font-family: sans-serif; margin-bottom: 12px; }
-    .review-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1a2535; }
-    .review-label { font-size: 12px; color: #6b7a8d; font-family: sans-serif; }
-    .review-value { font-size: 12px; color: #d8e8f8; font-family: sans-serif; font-weight: 600; text-align: right; max-width: 55%; }
-    .order-line { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1a2535; font-size: 13px; color: #c8d8e8; font-family: sans-serif; }
+    .review-section {
+      background: #1a120b; border: 1px solid #3d2b1a;
+      border-radius: 8px; padding: 18px 20px; margin-bottom: 14px;
+    }
+    .review-header {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #8b7355; margin-bottom: 12px; font-weight: 600;
+    }
+    .review-row {
+      display: flex; justify-content: space-between;
+      padding: 7px 0; border-bottom: 1px solid #2a1d10;
+    }
+    .review-label { font-size: 12px; color: #8b7355; }
+    .review-value { font-size: 12px; color: #e0c8a0; font-weight: 600; text-align: right; max-width: 55%; }
+    .order-line {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid #2a1d10;
+      font-size: 13px; color: #c8a060;
+    }
     .order-line-price { font-weight: 600; }
-    .order-total { display: flex; justify-content: space-between; padding: 12px 0 0; font-size: 15px; font-weight: 700; font-family: sans-serif; }
-    .order-total-price { color: #f5a623; font-size: 20px; }
+    .order-total {
+      display: flex; justify-content: space-between;
+      padding: 14px 0 0;
+      font-size: 15px; font-weight: 700;
+    }
+    .order-total-price {
+      font-family: 'Playfair Display', serif;
+      color: #e09b4a; font-size: 22px;
+    }
 
     /* SUMMARY STRIP */
     .summary-strip {
       position: fixed; bottom: 0; left: 0; right: 0;
-      background: #0f1520; border-top: 1px solid #1e2a3a;
-      padding: 14px 24px; display: flex; justify-content: space-between;
-      align-items: center; z-index: 100;
+      background: linear-gradient(180deg, #231810, #1a120b);
+      border-top: 1px solid #3d2b1a;
+      padding: 14px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 100;
     }
-    .summary-text { font-size: 13px; color: #8899aa; font-family: sans-serif; }
-    .summary-total { font-size: 18px; font-weight: 700; color: #f5a623; font-family: sans-serif; }
+    .summary-text { font-size: 13px; color: #8b7355; }
+    .summary-total {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700; color: #e09b4a;
+    }
 
     /* SUCCESS */
     .success-wrap { display: flex; align-items: center; justify-content: center; min-height: 80vh; }
-    .success-card { max-width: 440px; width: 100%; background: #0f1520; border: 1px solid #1e2a3a; border-radius: 12px; padding: 48px 40px; text-align: center; margin: 40px auto; }
-    .success-icon { width: 56px; height: 56px; background: linear-gradient(135deg,#2d6a47,#1a9a5c); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; margin: 0 auto 20px; }
-    .success-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
-    .success-text { font-size: 14px; color: #8899aa; font-family: sans-serif; margin-bottom: 6px; }
-    .success-sub { font-size: 13px; color: #6b7a8d; font-family: sans-serif; }
-    .success-divider { height: 1px; background: #1e2a3a; margin: 24px 0; }
-    .success-amount { font-size: 20px; color: #f5a623; font-weight: 700; font-family: sans-serif; }
+    .success-card {
+      max-width: 460px; width: 100%;
+      background: linear-gradient(180deg, #231810, #1e150e);
+      border: 1px solid #3d2b1a;
+      border-radius: 12px; padding: 48px 40px; text-align: center;
+      margin: 40px auto; position: relative; overflow: hidden;
+    }
+    .success-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #4a8a3a, #6aba5a, #4a8a3a, transparent);
+    }
+    .success-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, #3a6a2a, #4a8a3a);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; color: #fff; margin: 0 auto 20px;
+      box-shadow: 0 4px 20px #4a8a3a33;
+    }
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; font-weight: 700; margin-bottom: 10px;
+    }
+    .success-text { font-size: 14px; color: #8b7355; margin-bottom: 6px; }
+    .success-sub { font-size: 13px; color: #6b5740; }
+    .success-divider { height: 1px; background: #3d2b1a; margin: 24px 0; }
+    .success-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; color: #e09b4a; font-weight: 700;
+    }
+    /* Longhorn on success */
+    .success-longhorn { margin: 0 auto 24px; color: #3d2b1a; }
 
     /* STEPS */
     .step { display: none; }
@@ -192,11 +438,15 @@
       .card { padding: 24px 18px; }
       .grid2 { grid-template-columns: 1fr; }
       .ticket-grid { grid-template-columns: 1fr; }
-      .logo-fuse { font-size: 30px; }
+      .logo-fuse { font-size: 32px; }
+      .header-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .header-right { align-self: flex-start; }
     }
   </style>
 </head>
 <body>
+
+<div class="leather-bg"></div>
 
 <!-- HEADER -->
 <div class="header">
@@ -205,9 +455,18 @@
       <span class="logo-fuse">FUSE</span>
       <span class="logo-year">2026</span>
     </div>
-    <span class="header-city">Austin, Texas</span>
+    <div class="header-right">
+      <span class="header-city">Austin, Texas</span>
+    </div>
   </div>
-  <div class="header-accent"></div>
+  <div class="header-accent">
+    <svg class="longhorn-icon" width="48" height="22" viewBox="0 0 48 22" fill="none">
+      <path d="M24 18C24 18 22 14 22 11C22 8 23 6 24 5C25 6 26 8 26 11C26 14 24 18 24 18Z" fill="currentColor" opacity="0.6"/>
+      <path d="M22 11C22 8 20 5 16 3C12 1 6 1 1 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M26 11C26 8 28 5 32 3C36 1 42 1 47 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <circle cx="24" cy="20" r="1.5" fill="currentColor" opacity="0.4"/>
+    </svg>
+  </div>
 </div>
 
 <!-- PROGRESS -->
@@ -234,7 +493,7 @@
   <div class="step active" id="step-1">
     <div class="card">
       <h2 class="card-title">Attendee Information</h2>
-      <p class="card-subtitle">Tell us about yourself</p>
+      <p class="card-subtitle">Tell us about yourself, partner</p>
 
       <div class="grid2">
         <div class="field">
@@ -299,7 +558,7 @@
         </div>
       </div>
 
-      <button class="btn-primary" onclick="goToStep2()">Continue to Tickets →</button>
+      <button class="btn-primary" onclick="goToStep2()">Continue to Tickets ★</button>
     </div>
   </div>
 
@@ -323,7 +582,7 @@
         <div class="ticket-card" id="ticket-ga_plus" onclick="selectTicket('ga_plus', 699, 'General Admission Plus')">
           <div class="ticket-top">
             <div class="ticket-radio"><div class="ticket-radio-inner" id="radio-ga_plus"></div></div>
-            <span class="popular-badge">POPULAR</span>
+            <span class="popular-badge">★ POPULAR</span>
           </div>
           <div class="ticket-price">$699</div>
           <div class="ticket-name">General Admission Plus</div>
@@ -356,7 +615,7 @@
 
       <div class="nav-row">
         <button class="btn-back" onclick="goToStep(1)">← Back</button>
-        <button class="btn-primary" style="margin-top:0; flex:1;" onclick="goToStep3()">Review Order →</button>
+        <button class="btn-primary" style="margin-top:0; flex:1;" onclick="goToStep3()">Review Order ★</button>
       </div>
     </div>
   </div>
@@ -365,7 +624,7 @@
   <div class="step" id="step-3">
     <div class="card">
       <h2 class="card-title">Review Your Order</h2>
-      <p class="card-subtitle">Make sure everything looks right</p>
+      <p class="card-subtitle">Make sure everything looks right before you saddle up</p>
 
       <div class="review-section">
         <div class="review-header">Attendee</div>
@@ -383,7 +642,7 @@
 
       <div class="nav-row">
         <button class="btn-back" onclick="goToStep(2)">← Back</button>
-        <button class="btn-submit" onclick="submitForm()">Complete Registration</button>
+        <button class="btn-submit" onclick="submitForm()">Complete Registration ✦</button>
       </div>
     </div>
   </div>
@@ -392,12 +651,17 @@
   <div class="step" id="step-success">
     <div class="success-wrap">
       <div class="success-card">
+        <svg class="success-longhorn" width="64" height="30" viewBox="0 0 48 22" fill="none">
+          <path d="M24 18C24 18 22 14 22 11C22 8 23 6 24 5C25 6 26 8 26 11C26 14 24 18 24 18Z" fill="currentColor" opacity="0.5"/>
+          <path d="M22 11C22 8 20 5 16 3C12 1 6 1 1 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M26 11C26 8 28 5 32 3C36 1 42 1 47 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
         <div class="success-icon">✓</div>
         <h2 class="success-title">You're Registered!</h2>
         <p class="success-text">A confirmation has been sent to <strong id="success-email"></strong></p>
         <p class="success-sub">We'll see you in Austin, Texas at Fuse 2026.</p>
         <div class="success-divider"></div>
-        <p style="font-size:14px;color:#8899aa;font-family:sans-serif;">Order Total: <span class="success-amount" id="success-total"></span></p>
+        <p style="font-size:14px;color:#8b7355;">Order Total: <span class="success-amount" id="success-total"></span></p>
       </div>
     </div>
   </div>
@@ -419,7 +683,6 @@
     addons: {},
   };
 
-  // --- STEP NAV ---
   function goToStep(n) {
     document.getElementById('step-' + state.step).classList.remove('active');
     state.step = n;
@@ -443,7 +706,6 @@
     }
   }
 
-  // --- STEP 1 VALIDATION ---
   function goToStep2() {
     let valid = true;
     const fields = [
@@ -477,7 +739,6 @@
     const wmnCard = document.getElementById('addon-wmn');
     if (gender !== 'female') {
       wmnCard.classList.add('locked');
-      // Remove wmn from addons if selected
       if (state.addons['wmn']) {
         delete state.addons['wmn'];
         const check = document.getElementById('check-wmn');
@@ -489,7 +750,6 @@
     }
   }
 
-  // --- TICKETS ---
   function selectTicket(id, price, name) {
     if (state.ticket) {
       document.getElementById('ticket-' + state.ticket).classList.remove('selected');
@@ -502,7 +762,6 @@
     updateStrip();
   }
 
-  // --- ADDONS ---
   function toggleAddon(id, price, name) {
     const card = document.getElementById('addon-' + id);
     if (card.classList.contains('locked')) return;
@@ -538,7 +797,6 @@
     }
   }
 
-  // --- STEP 3 ---
   function goToStep3() {
     if (!state.ticket) {
       document.getElementById('ticket-error').innerHTML = '<div class="error-banner">Please select a ticket type</div>';
@@ -577,7 +835,6 @@
     document.getElementById('review-total').textContent = '$' + getTotal().toLocaleString();
   }
 
-  // --- SUBMIT ---
   function submitForm() {
     document.getElementById('success-email').textContent = document.getElementById('email').value;
     document.getElementById('success-total').textContent = '$' + getTotal().toLocaleString();
