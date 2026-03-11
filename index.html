@@ -372,8 +372,59 @@
     .ticket-name { font-size: 13px; font-weight: 700; color: #5a3a10; margin-bottom: 8px; }
     .ticket-desc { font-size: 11px; color: #8a7050; line-height: 1.5; }
 
+    /* GUESTS */
+    .guest-section { border-top: 2px solid #d4b880; padding-top: 24px; margin-top: 4px; }
+    .guest-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: #2a1a08;
+    }
+    .guest-subtitle { font-size: 12px; color: #8a7050; margin-bottom: 16px; }
+    .guest-card {
+      background: #f0ddb8;
+      border: 1px solid #c4a872;
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      position: relative;
+      box-shadow: inset 0 1px 4px rgba(100,60,20,0.06);
+    }
+    .guest-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px;
+    }
+    .guest-card-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #6a5030;
+    }
+    .guest-card-price { font-size: 13px; font-weight: 700; color: #5a3a10; }
+    .guest-remove {
+      background: none; border: none; color: #a06040; cursor: pointer;
+      font-size: 18px; line-height: 1; padding: 0 4px;
+      transition: color 0.2s; font-weight: 700;
+    }
+    .guest-remove:hover { color: #a03020; }
+    .guest-card .grid2 { margin-bottom: 0; }
+    .guest-card .field { margin-bottom: 10px; }
+    .guest-card .field:last-child { margin-bottom: 0; }
+    .btn-add-guest {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%;
+      background: #f5e8cc;
+      border: 2px dashed #c4a872;
+      border-radius: 6px;
+      padding: 14px;
+      color: #8a6a30;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 6px;
+    }
+    .btn-add-guest:hover { border-color: #a07030; background: #f0e0bc; color: #6a4a10; }
+    .btn-add-guest .plus { font-size: 18px; font-weight: 700; line-height: 1; }
+    .guest-count-note { font-size: 11px; color: #8a7050; text-align: center; margin-top: 4px; }
+
     /* ADDONS */
-    .addon-section { border-top: 2px solid #d4b880; padding-top: 24px; margin-top: 4px; }
+    .addon-section { border-top: 2px solid #d4b880; padding-top: 24px; margin-top: 20px; }
     .addon-title {
       font-family: 'Playfair Display', serif;
       font-size: 17px; font-weight: 700; margin-bottom: 4px; color: #2a1a08;
@@ -675,6 +726,16 @@
         </div>
       </div>
 
+      <div class="guest-section">
+        <h3 class="guest-title">Bring a Guest</h3>
+        <p class="guest-subtitle">Guest tickets are $399 each — add as many as you'd like</p>
+        <div id="guest-list"></div>
+        <button class="btn-add-guest" onclick="addGuest()">
+          <span class="plus">+</span> Add a Guest
+        </button>
+        <div class="guest-count-note" id="guest-count-note"></div>
+      </div>
+
       <div class="addon-section">
         <h3 class="addon-title">Add-Ons</h3>
         <p class="addon-subtitle">Enhance your Fuse experience</p>
@@ -761,7 +822,7 @@
 </div>
 
 <script>
-  let state = { step: 1, ticket: null, ticketPrice: 0, ticketName: '', addons: {} };
+  let state = { step: 1, ticket: null, ticketPrice: 0, ticketName: '', addons: {}, guests: [], guestIdCounter: 0 };
 
   function goToStep(n) {
     document.getElementById('step-' + state.step).classList.remove('active');
@@ -806,6 +867,74 @@
     } else { wmnCard.classList.remove('locked'); }
   }
 
+  /* --- GUESTS --- */
+  function addGuest() {
+    const id = ++state.guestIdCounter;
+    state.guests.push({ id, firstName: '', lastName: '', email: '' });
+    renderGuests();
+    updateStrip();
+  }
+
+  function removeGuest(id) {
+    state.guests = state.guests.filter(g => g.id !== id);
+    renderGuests();
+    updateStrip();
+  }
+
+  function updateGuestField(id, field, value) {
+    const g = state.guests.find(g => g.id === id);
+    if (g) g[field] = value;
+  }
+
+  function renderGuests() {
+    var list = document.getElementById('guest-list');
+    var html = '';
+    for (var i = 0; i < state.guests.length; i++) {
+      var g = state.guests[i];
+      var fnVal = g.firstName.replace(/"/g, '&quot;');
+      var lnVal = g.lastName.replace(/"/g, '&quot;');
+      var emVal = g.email.replace(/"/g, '&quot;');
+      html += '<div class="guest-card" id="guest-card-' + g.id + '">';
+      html += '<div class="guest-card-header">';
+      html += '<span class="guest-card-label">Guest ' + (i + 1) + '</span>';
+      html += '<div style="display:flex;align-items:center;gap:12px;">';
+      html += '<span class="guest-card-price">$399</span>';
+      html += '<button class="guest-remove" onclick="removeGuest(' + g.id + ')" title="Remove guest">&times;</button>';
+      html += '</div></div>';
+      html += '<div class="grid2">';
+      html += '<div class="field"><label>First Name <span class="req">*</span></label>';
+      html += '<input type="text" placeholder="First name" value="' + fnVal + '" oninput="updateGuestField(' + g.id + ',\'firstName\',this.value)" id="guest-fn-' + g.id + '" />';
+      html += '<span class="error-text" id="err-guest-fn-' + g.id + '"></span></div>';
+      html += '<div class="field"><label>Last Name <span class="req">*</span></label>';
+      html += '<input type="text" placeholder="Last name" value="' + lnVal + '" oninput="updateGuestField(' + g.id + ',\'lastName\',this.value)" id="guest-ln-' + g.id + '" />';
+      html += '<span class="error-text" id="err-guest-ln-' + g.id + '"></span></div>';
+      html += '</div>';
+      html += '<div class="field"><label>Email Address <span class="req">*</span></label>';
+      html += '<input type="email" placeholder="guest@email.com" value="' + emVal + '" oninput="updateGuestField(' + g.id + ',\'email\',this.value)" id="guest-em-' + g.id + '" />';
+      html += '<span class="error-text" id="err-guest-em-' + g.id + '"></span></div>';
+      html += '</div>';
+    }
+    list.innerHTML = html;
+    const note = document.getElementById('guest-count-note');
+    note.textContent = state.guests.length > 0 ? `${state.guests.length} guest${state.guests.length > 1 ? 's' : ''} added — ${(state.guests.length * 399).toLocaleString()}` : '';
+  }
+
+  function validateGuests() {
+    let valid = true;
+    state.guests.forEach(g => {
+      const fn = document.getElementById('guest-fn-' + g.id);
+      const ln = document.getElementById('guest-ln-' + g.id);
+      const em = document.getElementById('guest-em-' + g.id);
+      const eFn = document.getElementById('err-guest-fn-' + g.id);
+      const eLn = document.getElementById('err-guest-ln-' + g.id);
+      const eEm = document.getElementById('err-guest-em-' + g.id);
+      if (!g.firstName.trim()) { eFn.textContent = 'Required'; fn.classList.add('error'); valid = false; } else { eFn.textContent = ''; fn.classList.remove('error'); }
+      if (!g.lastName.trim()) { eLn.textContent = 'Required'; ln.classList.add('error'); valid = false; } else { eLn.textContent = ''; ln.classList.remove('error'); }
+      if (!g.email.trim() || !/\S+@\S+\.\S+/.test(g.email)) { eEm.textContent = 'Valid email required'; em.classList.add('error'); valid = false; } else { eEm.textContent = ''; em.classList.remove('error'); }
+    });
+    return valid;
+  }
+
   function selectTicket(id, price, name) {
     if (state.ticket) document.getElementById('ticket-' + state.ticket).classList.remove('selected');
     state.ticket = id; state.ticketPrice = price; state.ticketName = name;
@@ -823,13 +952,17 @@
     updateStrip();
   }
 
-  function getTotal() { let t = state.ticketPrice; Object.values(state.addons).forEach(a => t += a.price); return t; }
+  function getTotal() { let t = state.ticketPrice; Object.values(state.addons).forEach(a => t += a.price); t += state.guests.length * 399; return t; }
 
   function updateStrip() {
     const strip = document.getElementById('summary-strip');
     if (state.step === 2 && state.ticket) {
       const ac = Object.keys(state.addons).length;
-      document.getElementById('summary-text').textContent = state.ticketName + (ac > 0 ? ` + ${ac} add-on${ac > 1 ? 's' : ''}` : '');
+      const gc = state.guests.length;
+      let parts = [state.ticketName];
+      if (gc > 0) parts.push(`${gc} guest${gc > 1 ? 's' : ''}`);
+      if (ac > 0) parts.push(`${ac} add-on${ac > 1 ? 's' : ''}`);
+      document.getElementById('summary-text').textContent = parts.join(' + ');
       document.getElementById('summary-total').textContent = '$' + getTotal().toLocaleString();
       strip.style.display = 'flex';
     } else { strip.style.display = 'none'; }
@@ -837,6 +970,7 @@
 
   function goToStep3() {
     if (!state.ticket) { document.getElementById('ticket-error').innerHTML = '<div class="error-banner">Please select a ticket type</div>'; return; }
+    if (!validateGuests()) return;
     buildReview(); goToStep(3);
   }
 
@@ -854,8 +988,26 @@
       ['Fuse Events Attended', fuseMap[fv] || fv],
     ].filter(Boolean);
     document.getElementById('review-attendee').innerHTML = rows.map(([l,v]) => `<div class="review-row"><span class="review-label">${l}</span><span class="review-value">${v}</span></div>`).join('');
-    let oh = `<div class="order-line"><span>${state.ticketName}</span><span class="order-line-price">$${state.ticketPrice.toLocaleString()}</span></div>`;
-    Object.values(state.addons).forEach(a => { oh += `<div class="order-line"><span>${a.name}</span><span class="order-line-price">${a.price === 0 ? 'FREE' : '$' + a.price.toLocaleString()}</span></div>`; });
+    let oh = `<div class="order-line"><span>${state.ticketName}</span><span class="order-line-price">${state.ticketPrice.toLocaleString()}</span></div>`;
+    state.guests.forEach((g, i) => { oh += `<div class="order-line"><span>Guest: ${g.firstName} ${g.lastName}</span><span class="order-line-price">$399</span></div>`; });
+    Object.values(state.addons).forEach(a => { oh += `<div class="order-line"><span>${a.name}</span><span class="order-line-price">${a.price === 0 ? 'FREE' : '
+    document.getElementById('review-order').innerHTML = oh;
+    document.getElementById('review-total').textContent = '$' + getTotal().toLocaleString();
+  }
+
+  function submitForm() {
+    document.getElementById('success-email').textContent = document.getElementById('email').value;
+    document.getElementById('success-total').textContent = '$' + getTotal().toLocaleString();
+    document.getElementById('step-3').classList.remove('active');
+    state.step = 'success';
+    document.getElementById('step-success').classList.add('active');
+    document.getElementById('summary-strip').style.display = 'none';
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
+ + a.price.toLocaleString()}</span></div>`; });
     document.getElementById('review-order').innerHTML = oh;
     document.getElementById('review-total').textContent = '$' + getTotal().toLocaleString();
   }
