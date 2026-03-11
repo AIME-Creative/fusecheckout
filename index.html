@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fuse 2026 — Registration</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #0a0e1a;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #fff;
+      padding-bottom: 100px;
+    }
+
+    /* HEADER */
+    .header {
+      border-bottom: 1px solid #1e2a3a;
+      position: relative;
+      overflow: hidden;
+    }
+    .header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 36px 24px 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .logo-area { display: flex; align-items: baseline; gap: 10px; }
+    .logo-fuse { font-size: 42px; font-weight: 700; letter-spacing: 0.18em; color: #fff; line-height: 1; }
+    .logo-year { font-size: 16px; letter-spacing: 0.3em; color: #e07b2a; font-family: sans-serif; }
+    .header-city { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: #6b7a8d; font-family: sans-serif; }
+    .header-accent { height: 3px; background: linear-gradient(90deg, #e07b2a 0%, #f5a623 40%, transparent 100%); }
+
+    /* PROGRESS */
+    .progress-bar {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 24px 8px;
+      display: flex;
+      align-items: center;
+    }
+    .progress-step { display: flex; align-items: center; gap: 8px; flex: 1; }
+    .progress-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #1e2a3a; border: 2px solid #2e3d50;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #6b7a8d; font-family: sans-serif;
+      flex-shrink: 0; transition: all 0.2s;
+    }
+    .progress-dot.active { background: #e07b2a; border-color: #e07b2a; color: #fff; }
+    .progress-dot.done { background: #1a3a28; border-color: #2d6a47; color: #4ade80; }
+    .progress-label { font-size: 11px; letter-spacing: 0.08em; color: #4a5568; font-family: sans-serif; text-transform: uppercase; white-space: nowrap; }
+    .progress-label.active { color: #e07b2a; }
+    .progress-line { flex: 1; height: 1px; background: #1e2a3a; margin-left: 8px; }
+    .progress-line.done { background: #2d6a47; }
+
+    /* CONTAINER & CARD */
+    .container { max-width: 680px; margin: 0 auto; padding: 20px 24px; }
+    .card { background: #0f1520; border: 1px solid #1e2a3a; border-radius: 12px; padding: 36px 40px; }
+    .card-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .card-subtitle { font-size: 13px; color: #6b7a8d; margin-bottom: 28px; font-family: sans-serif; }
+
+    /* FIELDS */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8899aa; margin-bottom: 7px; font-family: sans-serif; }
+    .field label .req { color: #e07b2a; }
+    .field label .hint { color: #4a5568; text-transform: none; letter-spacing: 0; font-style: italic; }
+    .field input, .field select {
+      width: 100%; background: #141e2e; border: 1px solid #2a3a4e;
+      border-radius: 6px; padding: 11px 14px; color: #e8f0f8;
+      font-size: 14px; font-family: sans-serif; outline: none;
+      transition: border-color 0.15s;
+    }
+    .field input:focus, .field select:focus { border-color: #e07b2a; }
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7a8d'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-color: #141e2e;
+      padding-right: 32px; cursor: pointer;
+    }
+    .field input.error, .field select.error { border-color: #c0392b; }
+    .error-text { display: block; font-size: 11px; color: #e05050; margin-top: 4px; font-family: sans-serif; }
+    .error-banner { background: #2a1010; border: 1px solid #5a1a1a; color: #e07070; border-radius: 6px; padding: 10px 14px; font-size: 13px; font-family: sans-serif; margin-bottom: 16px; }
+
+    /* BUTTONS */
+    .btn-primary {
+      width: 100%; background: linear-gradient(135deg, #e07b2a, #f5a623);
+      color: #fff; border: none; border-radius: 7px; padding: 14px 24px;
+      font-size: 14px; font-family: sans-serif; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+      margin-top: 12px; transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-back {
+      background: transparent; color: #6b7a8d; border: 1px solid #2a3a4e;
+      border-radius: 7px; padding: 14px 24px; font-size: 13px;
+      font-family: sans-serif; cursor: pointer; transition: border-color 0.15s;
+    }
+    .btn-back:hover { border-color: #4a5a6e; color: #8899aa; }
+    .btn-submit {
+      flex: 1; background: linear-gradient(135deg, #2d6a47, #1a9a5c);
+      color: #fff; border: none; border-radius: 7px; padding: 14px 24px;
+      font-size: 14px; font-family: sans-serif; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-submit:hover { opacity: 0.9; }
+    .nav-row { display: flex; gap: 12px; margin-top: 12px; align-items: center; }
+
+    /* TICKETS */
+    .ticket-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+    .ticket-card {
+      background: #141e2e; border: 2px solid #1e2a3a; border-radius: 10px;
+      padding: 20px 18px; cursor: pointer; transition: all 0.15s;
+    }
+    .ticket-card:hover { border-color: #3a4a5e; }
+    .ticket-card.selected { border-color: #e07b2a; background: #1a1808; }
+    .ticket-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .ticket-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #3a4a5e; display: flex; align-items: center; justify-content: center; }
+    .ticket-radio-inner { width: 8px; height: 8px; border-radius: 50%; background: transparent; transition: background 0.15s; }
+    .ticket-card.selected .ticket-radio-inner { background: #e07b2a; }
+    .popular-badge { font-size: 9px; letter-spacing: 0.15em; color: #e07b2a; font-family: sans-serif; font-weight: 700; text-transform: uppercase; border: 1px solid #e07b2a; padding: 2px 6px; border-radius: 3px; }
+    .ticket-price { font-size: 28px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; }
+    .ticket-name { font-size: 13px; font-weight: 600; color: #c8d8e8; margin-bottom: 8px; font-family: sans-serif; }
+    .ticket-desc { font-size: 11px; color: #5a6a7a; font-family: sans-serif; line-height: 1.5; }
+
+    /* ADDONS */
+    .addon-section { border-top: 1px solid #1e2a3a; padding-top: 24px; }
+    .addon-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .addon-subtitle { font-size: 12px; color: #6b7a8d; font-family: sans-serif; margin-bottom: 16px; }
+    .addon-card {
+      display: flex; align-items: center; gap: 14px;
+      background: #141e2e; border: 2px solid #1e2a3a; border-radius: 8px;
+      padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s;
+    }
+    .addon-card:hover:not(.locked) { border-color: #3a4a5e; }
+    .addon-card.selected { border-color: #e07b2a; background: #1a1808; }
+    .addon-card.locked { opacity: 0.4; cursor: not-allowed; }
+    .addon-check { flex-shrink: 0; }
+    .checkmark { width: 20px; height: 20px; background: #e07b2a; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 700; font-family: sans-serif; }
+    .check-empty { width: 20px; height: 20px; border: 2px solid #2a3a4e; border-radius: 4px; }
+    .addon-info { flex: 1; }
+    .addon-name { font-size: 13px; font-weight: 600; color: #d8e8f8; font-family: sans-serif; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .women-badge { font-size: 9px; letter-spacing: 0.1em; color: #c47ab8; font-family: sans-serif; font-weight: 700; text-transform: uppercase; border: 1px solid #c47ab8; padding: 2px 5px; border-radius: 3px; }
+    .addon-desc { font-size: 11px; color: #5a6a7a; font-family: sans-serif; line-height: 1.4; }
+    .addon-price { flex-shrink: 0; font-size: 15px; font-weight: 700; color: #fff; font-family: sans-serif; }
+    .addon-price.locked-price { font-size: 11px; color: #5a6a7a; }
+
+    /* REVIEW */
+    .review-section { background: #141e2e; border: 1px solid #1e2a3a; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; }
+    .review-header { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b7a8d; font-family: sans-serif; margin-bottom: 12px; }
+    .review-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1a2535; }
+    .review-label { font-size: 12px; color: #6b7a8d; font-family: sans-serif; }
+    .review-value { font-size: 12px; color: #d8e8f8; font-family: sans-serif; font-weight: 600; text-align: right; max-width: 55%; }
+    .order-line { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1a2535; font-size: 13px; color: #c8d8e8; font-family: sans-serif; }
+    .order-line-price { font-weight: 600; }
+    .order-total { display: flex; justify-content: space-between; padding: 12px 0 0; font-size: 15px; font-weight: 700; font-family: sans-serif; }
+    .order-total-price { color: #f5a623; font-size: 20px; }
+
+    /* SUMMARY STRIP */
+    .summary-strip {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #0f1520; border-top: 1px solid #1e2a3a;
+      padding: 14px 24px; display: flex; justify-content: space-between;
+      align-items: center; z-index: 100;
+    }
+    .summary-text { font-size: 13px; color: #8899aa; font-family: sans-serif; }
+    .summary-total { font-size: 18px; font-weight: 700; color: #f5a623; font-family: sans-serif; }
+
+    /* SUCCESS */
+    .success-wrap { display: flex; align-items: center; justify-content: center; min-height: 80vh; }
+    .success-card { max-width: 440px; width: 100%; background: #0f1520; border: 1px solid #1e2a3a; border-radius: 12px; padding: 48px 40px; text-align: center; margin: 40px auto; }
+    .success-icon { width: 56px; height: 56px; background: linear-gradient(135deg,#2d6a47,#1a9a5c); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; margin: 0 auto 20px; }
+    .success-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+    .success-text { font-size: 14px; color: #8899aa; font-family: sans-serif; margin-bottom: 6px; }
+    .success-sub { font-size: 13px; color: #6b7a8d; font-family: sans-serif; }
+    .success-divider { height: 1px; background: #1e2a3a; margin: 24px 0; }
+    .success-amount { font-size: 20px; color: #f5a623; font-weight: 700; font-family: sans-serif; }
+
+    /* STEPS */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    @media (max-width: 520px) {
+      .card { padding: 24px 18px; }
+      .grid2 { grid-template-columns: 1fr; }
+      .ticket-grid { grid-template-columns: 1fr; }
+      .logo-fuse { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <span class="logo-fuse">FUSE</span>
+      <span class="logo-year">2026</span>
+    </div>
+    <span class="header-city">Austin, Texas</span>
+  </div>
+  <div class="header-accent"></div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar">
+  <div class="progress-step">
+    <div class="progress-dot active" id="dot-1">1</div>
+    <span class="progress-label active" id="lbl-1">Your Info</span>
+    <div class="progress-line" id="line-1"></div>
+  </div>
+  <div class="progress-step">
+    <div class="progress-dot" id="dot-2">2</div>
+    <span class="progress-label" id="lbl-2">Tickets</span>
+    <div class="progress-line" id="line-2"></div>
+  </div>
+  <div class="progress-step">
+    <div class="progress-dot" id="dot-3">3</div>
+    <span class="progress-label" id="lbl-3">Review</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- STEP 1 -->
+  <div class="step active" id="step-1">
+    <div class="card">
+      <h2 class="card-title">Attendee Information</h2>
+      <p class="card-subtitle">Tell us about yourself</p>
+
+      <div class="grid2">
+        <div class="field">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" placeholder="Jane" />
+          <span class="error-text" id="err-firstName"></span>
+        </div>
+        <div class="field">
+          <label>Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" placeholder="Smith" />
+          <span class="error-text" id="err-lastName"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Preferred Name <span class="hint">— What should we put on your badge?</span></label>
+        <input type="text" id="preferredName" placeholder="e.g. JJ" />
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>Mobile Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="(555) 000-0000" />
+          <span class="error-text" id="err-phone"></span>
+        </div>
+        <div class="field">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="jane@company.com" />
+          <span class="error-text" id="err-email"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Company Name <span class="req">*</span></label>
+        <input type="text" id="company" placeholder="Your Brokerage or Company" />
+        <span class="error-text" id="err-company"></span>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>Gender <span class="req">*</span></label>
+          <select id="gender">
+            <option value="">Select...</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="prefer_not">Prefer not to say</option>
+          </select>
+          <span class="error-text" id="err-gender"></span>
+        </div>
+        <div class="field">
+          <label>Fuse Events Attended <span class="req">*</span></label>
+          <select id="fuseCount">
+            <option value="">Select...</option>
+            <option value="first">This is my first Fuse</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5+">5+</option>
+          </select>
+          <span class="error-text" id="err-fuseCount"></span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="goToStep2()">Continue to Tickets →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="step-2">
+    <div class="card">
+      <h2 class="card-title">Select Your Ticket</h2>
+      <p class="card-subtitle">Choose the experience that's right for you</p>
+
+      <div id="ticket-error"></div>
+
+      <div class="ticket-grid">
+        <div class="ticket-card" id="ticket-ga" onclick="selectTicket('ga', 499, 'General Admission')">
+          <div class="ticket-top">
+            <div class="ticket-radio"><div class="ticket-radio-inner" id="radio-ga"></div></div>
+          </div>
+          <div class="ticket-price">$499</div>
+          <div class="ticket-name">General Admission</div>
+          <div class="ticket-desc">Full access to all Fuse 2026 sessions & networking events</div>
+        </div>
+        <div class="ticket-card" id="ticket-ga_plus" onclick="selectTicket('ga_plus', 699, 'General Admission Plus')">
+          <div class="ticket-top">
+            <div class="ticket-radio"><div class="ticket-radio-inner" id="radio-ga_plus"></div></div>
+            <span class="popular-badge">POPULAR</span>
+          </div>
+          <div class="ticket-price">$699</div>
+          <div class="ticket-name">General Admission Plus</div>
+          <div class="ticket-desc">Everything in GA plus exclusive VIP lounge access & premium seating</div>
+        </div>
+      </div>
+
+      <div class="addon-section">
+        <h3 class="addon-title">Add-Ons</h3>
+        <p class="addon-subtitle">Enhance your Fuse experience</p>
+
+        <div class="addon-card" id="addon-hall_of_aime" onclick="toggleAddon('hall_of_aime', 349, 'Hall of AIME')">
+          <div class="addon-check" id="check-hall_of_aime"><div class="check-empty"></div></div>
+          <div class="addon-info">
+            <div class="addon-name">Hall of AIME</div>
+            <div class="addon-desc">An exclusive recognition ceremony celebrating the best in the broker channel</div>
+          </div>
+          <div class="addon-price">$349</div>
+        </div>
+
+        <div class="addon-card" id="addon-wmn" onclick="toggleAddon('wmn', 0, 'WMN at Fuse')">
+          <div class="addon-check" id="check-wmn"><div class="check-empty"></div></div>
+          <div class="addon-info">
+            <div class="addon-name">WMN at Fuse <span class="women-badge">Women Only</span></div>
+            <div class="addon-desc">Women's Mortgage Network exclusive gathering — open to women attendees only</div>
+          </div>
+          <div class="addon-price" id="wmn-price">FREE</div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="goToStep(1)">← Back</button>
+        <button class="btn-primary" style="margin-top:0; flex:1;" onclick="goToStep3()">Review Order →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="step-3">
+    <div class="card">
+      <h2 class="card-title">Review Your Order</h2>
+      <p class="card-subtitle">Make sure everything looks right</p>
+
+      <div class="review-section">
+        <div class="review-header">Attendee</div>
+        <div id="review-attendee"></div>
+      </div>
+
+      <div class="review-section">
+        <div class="review-header">Order Summary</div>
+        <div id="review-order"></div>
+        <div class="order-total">
+          <span>Total</span>
+          <span class="order-total-price" id="review-total"></span>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-back" onclick="goToStep(2)">← Back</button>
+        <button class="btn-submit" onclick="submitForm()">Complete Registration</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="step" id="step-success">
+    <div class="success-wrap">
+      <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h2 class="success-title">You're Registered!</h2>
+        <p class="success-text">A confirmation has been sent to <strong id="success-email"></strong></p>
+        <p class="success-sub">We'll see you in Austin, Texas at Fuse 2026.</p>
+        <div class="success-divider"></div>
+        <p style="font-size:14px;color:#8899aa;font-family:sans-serif;">Order Total: <span class="success-amount" id="success-total"></span></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY STRIP -->
+<div class="summary-strip" id="summary-strip" style="display:none;">
+  <span class="summary-text" id="summary-text"></span>
+  <span class="summary-total" id="summary-total"></span>
+</div>
+
+<script>
+  let state = {
+    step: 1,
+    ticket: null,
+    ticketPrice: 0,
+    ticketName: '',
+    addons: {},
+  };
+
+  // --- STEP NAV ---
+  function goToStep(n) {
+    document.getElementById('step-' + state.step).classList.remove('active');
+    state.step = n;
+    document.getElementById('step-' + state.step).classList.add('active');
+    updateProgress();
+    updateStrip();
+    window.scrollTo(0,0);
+  }
+
+  function updateProgress() {
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('dot-' + i);
+      const lbl = document.getElementById('lbl-' + i);
+      const line = document.getElementById('line-' + i);
+      dot.classList.remove('active','done');
+      lbl.classList.remove('active');
+      if (line) line.classList.remove('done');
+      if (i < state.step) { dot.classList.add('done'); dot.innerHTML = '✓'; if (line) line.classList.add('done'); }
+      else if (i === state.step) { dot.classList.add('active'); dot.innerHTML = i; lbl.classList.add('active'); }
+      else { dot.innerHTML = i; }
+    }
+  }
+
+  // --- STEP 1 VALIDATION ---
+  function goToStep2() {
+    let valid = true;
+    const fields = [
+      { id: 'firstName', msg: 'Required' },
+      { id: 'lastName', msg: 'Required' },
+      { id: 'phone', msg: 'Required' },
+      { id: 'company', msg: 'Required' },
+      { id: 'gender', msg: 'Required' },
+      { id: 'fuseCount', msg: 'Required' },
+    ];
+    fields.forEach(f => {
+      const el = document.getElementById(f.id);
+      const err = document.getElementById('err-' + f.id);
+      if (!el.value.trim()) { err.textContent = f.msg; el.classList.add('error'); valid = false; }
+      else { err.textContent = ''; el.classList.remove('error'); }
+    });
+    const email = document.getElementById('email');
+    const errEmail = document.getElementById('err-email');
+    if (!email.value.trim() || !/\S+@\S+\.\S+/.test(email.value)) {
+      errEmail.textContent = 'Valid email required'; email.classList.add('error'); valid = false;
+    } else { errEmail.textContent = ''; email.classList.remove('error'); }
+
+    if (valid) {
+      updateWmnAddon();
+      goToStep(2);
+    }
+  }
+
+  function updateWmnAddon() {
+    const gender = document.getElementById('gender').value;
+    const wmnCard = document.getElementById('addon-wmn');
+    if (gender !== 'female') {
+      wmnCard.classList.add('locked');
+      // Remove wmn from addons if selected
+      if (state.addons['wmn']) {
+        delete state.addons['wmn'];
+        const check = document.getElementById('check-wmn');
+        check.innerHTML = '<div class="check-empty"></div>';
+        wmnCard.classList.remove('selected');
+      }
+    } else {
+      wmnCard.classList.remove('locked');
+    }
+  }
+
+  // --- TICKETS ---
+  function selectTicket(id, price, name) {
+    if (state.ticket) {
+      document.getElementById('ticket-' + state.ticket).classList.remove('selected');
+    }
+    state.ticket = id;
+    state.ticketPrice = price;
+    state.ticketName = name;
+    document.getElementById('ticket-' + id).classList.add('selected');
+    document.getElementById('ticket-error').innerHTML = '';
+    updateStrip();
+  }
+
+  // --- ADDONS ---
+  function toggleAddon(id, price, name) {
+    const card = document.getElementById('addon-' + id);
+    if (card.classList.contains('locked')) return;
+    const check = document.getElementById('check-' + id);
+    if (state.addons[id]) {
+      delete state.addons[id];
+      check.innerHTML = '<div class="check-empty"></div>';
+      card.classList.remove('selected');
+    } else {
+      state.addons[id] = { price, name };
+      check.innerHTML = '<div class="checkmark">✓</div>';
+      card.classList.add('selected');
+    }
+    updateStrip();
+  }
+
+  function getTotal() {
+    let t = state.ticketPrice;
+    Object.values(state.addons).forEach(a => t += a.price);
+    return t;
+  }
+
+  function updateStrip() {
+    const strip = document.getElementById('summary-strip');
+    if (state.step === 2 && state.ticket) {
+      const addonCount = Object.keys(state.addons).length;
+      const addonText = addonCount > 0 ? ` + ${addonCount} add-on${addonCount > 1 ? 's' : ''}` : '';
+      document.getElementById('summary-text').textContent = state.ticketName + addonText;
+      document.getElementById('summary-total').textContent = '$' + getTotal().toLocaleString();
+      strip.style.display = 'flex';
+    } else {
+      strip.style.display = 'none';
+    }
+  }
+
+  // --- STEP 3 ---
+  function goToStep3() {
+    if (!state.ticket) {
+      document.getElementById('ticket-error').innerHTML = '<div class="error-banner">Please select a ticket type</div>';
+      return;
+    }
+    buildReview();
+    goToStep(3);
+  }
+
+  function buildReview() {
+    const gender = document.getElementById('gender');
+    const genderMap = { male: 'Male', female: 'Female', prefer_not: 'Prefer not to say' };
+    const fuseMap = { first: 'This is my first Fuse' };
+    const fuseVal = document.getElementById('fuseCount').value;
+    const preferred = document.getElementById('preferredName').value;
+
+    let attendeeRows = [
+      ['Name', document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value],
+      preferred ? ['Badge Name', preferred] : null,
+      ['Email', document.getElementById('email').value],
+      ['Phone', document.getElementById('phone').value],
+      ['Company', document.getElementById('company').value],
+      ['Gender', genderMap[gender.value] || gender.value],
+      ['Fuse Events Attended', fuseMap[fuseVal] || fuseVal],
+    ].filter(Boolean);
+
+    document.getElementById('review-attendee').innerHTML = attendeeRows.map(([l,v]) =>
+      `<div class="review-row"><span class="review-label">${l}</span><span class="review-value">${v}</span></div>`
+    ).join('');
+
+    let orderHTML = `<div class="order-line"><span>${state.ticketName}</span><span class="order-line-price">$${state.ticketPrice.toLocaleString()}</span></div>`;
+    Object.values(state.addons).forEach(a => {
+      orderHTML += `<div class="order-line"><span>${a.name}</span><span class="order-line-price">${a.price === 0 ? 'FREE' : '$' + a.price.toLocaleString()}</span></div>`;
+    });
+    document.getElementById('review-order').innerHTML = orderHTML;
+    document.getElementById('review-total').textContent = '$' + getTotal().toLocaleString();
+  }
+
+  // --- SUBMIT ---
+  function submitForm() {
+    document.getElementById('success-email').textContent = document.getElementById('email').value;
+    document.getElementById('success-total').textContent = '$' + getTotal().toLocaleString();
+    document.getElementById('step-3').classList.remove('active');
+    state.step = 'success';
+    document.getElementById('step-success').classList.add('active');
+    document.getElementById('summary-strip').style.display = 'none';
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
