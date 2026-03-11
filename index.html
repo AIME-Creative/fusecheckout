@@ -1,221 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fuse 2026 — Registration</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuse 2026 Registration</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       min-height: 100vh;
       background: #1a1008;
-      font-family: 'Inter', sans-serif;
+      font-family: Inter, sans-serif;
       color: #3a2a18;
       padding-bottom: 100px;
-      position: relative;
     }
-
-    /* Dark wood background */
     .wood-bg {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background:
-        repeating-linear-gradient(
-          90deg,
-          transparent 0px, transparent 18px,
-          rgba(0,0,0,0.03) 18px, rgba(0,0,0,0.03) 20px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          transparent 0px, transparent 45px,
-          rgba(0,0,0,0.02) 45px, rgba(0,0,0,0.02) 46px
-        ),
-        linear-gradient(180deg,
-          #1a1008 0%,
-          #231810 20%,
-          #2a1d12 50%,
-          #1e150e 80%,
-          #140e08 100%
-        );
+        repeating-linear-gradient(90deg, transparent 0px, transparent 18px, rgba(0,0,0,0.03) 18px, rgba(0,0,0,0.03) 20px),
+        repeating-linear-gradient(90deg, transparent 0px, transparent 45px, rgba(0,0,0,0.02) 45px, rgba(0,0,0,0.02) 46px),
+        linear-gradient(180deg, #1a1008 0%, #231810 20%, #2a1d12 50%, #1e150e 80%, #140e08 100%);
       z-index: 0;
     }
-
-    /* Mountain silhouette header */
     .mountain-header {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       background: linear-gradient(180deg, #0e0a05 0%, #1a1208 60%, transparent 100%);
-      padding-bottom: 30px;
-      overflow: hidden;
+      padding-bottom: 30px; overflow: hidden;
     }
-    .mountain-scene {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 80px;
-      overflow: hidden;
-    }
+    .mountain-scene { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; overflow: hidden; }
     .mountain-scene svg { width: 100%; height: 100%; }
-
     .header-inner {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 28px 24px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      z-index: 2;
+      max-width: 720px; margin: 0 auto; padding: 28px 24px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 2;
     }
     .logo-area { display: flex; align-items: center; gap: 14px; }
     .logo-fuse {
-      font-family: 'Playfair Display', serif;
-      font-size: 46px;
-      font-weight: 900;
-      letter-spacing: 0.15em;
-      color: #e8c87a;
-      line-height: 1;
+      font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 900;
+      letter-spacing: 0.15em; color: #e8c87a; line-height: 1;
       text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
     .logo-year {
-      font-size: 13px;
-      letter-spacing: 0.35em;
-      color: #c8943a;
-      font-weight: 700;
-      padding: 3px 8px;
-      border: 1px solid #c8943a66;
-      border-radius: 3px;
+      font-size: 13px; letter-spacing: 0.35em; color: #c8943a; font-weight: 700;
+      padding: 3px 8px; border: 1px solid #c8943a66; border-radius: 3px;
     }
-    .header-city {
-      font-size: 11px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #8a7555;
-    }
-
-    /* Longhorn divider */
+    .header-city { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #8a7555; }
     .longhorn-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 24px;
-      position: relative;
-      z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6px 24px; position: relative; z-index: 2;
     }
     .longhorn-divider::before, .longhorn-divider::after {
-      content: '';
-      flex: 1;
-      max-width: 280px;
-      height: 1px;
+      content: ''; flex: 1; max-width: 280px; height: 1px;
       background: linear-gradient(90deg, transparent, #5a4020, transparent);
     }
     .longhorn-icon { margin: 0 16px; color: #c8943a; flex-shrink: 0; }
-
-    /* PARCHMENT CARD */
-    .container { max-width: 720px; margin: 0 auto; padding: 20px 24px; position: relative; z-index: 1; }
-
-    .parchment {
-      position: relative;
-      background: #e8d5b0;
-      border-radius: 4px;
-      padding: 40px 44px;
-      color: #3a2a18;
-      box-shadow:
-        0 4px 24px rgba(0,0,0,0.5),
-        inset 0 0 60px rgba(160,120,60,0.15),
-        inset 0 0 120px rgba(120,80,30,0.08);
-      border: 1px solid #c4a872;
-    }
-    /* Parchment texture */
-    .parchment::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border-radius: 4px;
-      background:
-        radial-gradient(ellipse at 15% 10%, rgba(180,140,70,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 85% 90%, rgba(140,100,40,0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(200,160,80,0.05) 0%, transparent 70%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-    /* Burnt/aged edges */
-    .parchment::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border-radius: 4px;
-      box-shadow:
-        inset 0 0 30px rgba(100,60,20,0.2),
-        inset 0 0 80px rgba(80,40,10,0.08);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .parchment > * { position: relative; z-index: 1; }
-
-    /* Torn edge top */
-    .torn-edge-top {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-      height: 16px;
-      overflow: hidden;
-    }
-    .torn-edge-top-inner {
-      height: 16px;
-      background: #e8d5b0;
-      border-radius: 4px 4px 0 0;
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='16'%3E%3Cpath d='M0,0 L700,0 L700,16 Q680,8 660,14 Q640,6 620,12 Q600,5 580,13 Q560,7 540,11 Q520,4 500,14 Q480,6 460,12 Q440,8 420,13 Q400,5 380,11 Q360,7 340,14 Q320,5 300,12 Q280,8 260,13 Q240,4 220,11 Q200,7 180,14 Q160,5 140,12 Q120,8 100,13 Q80,5 60,11 Q40,7 20,14 Q10,6 0,16 Z' fill='white'/%3E%3C/svg%3E");
-      mask-size: 100% 100%;
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='16'%3E%3Cpath d='M0,0 L700,0 L700,16 Q680,8 660,14 Q640,6 620,12 Q600,5 580,13 Q560,7 540,11 Q520,4 500,14 Q480,6 460,12 Q440,8 420,13 Q400,5 380,11 Q360,7 340,14 Q320,5 300,12 Q280,8 260,13 Q240,4 220,11 Q200,7 180,14 Q160,5 140,12 Q120,8 100,13 Q80,5 60,11 Q40,7 20,14 Q10,6 0,16 Z' fill='white'/%3E%3C/svg%3E");
-      -webkit-mask-size: 100% 100%;
-    }
-
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 900;
-      margin-bottom: 4px;
-      color: #2a1a08;
-      text-align: center;
-    }
-    .card-subtitle {
-      font-size: 13px;
-      color: #7a6040;
-      margin-bottom: 28px;
-      text-align: center;
-    }
-
-    /* Decorative rule under title */
-    .title-rule {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 24px;
-      color: #b8943a;
-    }
-    .title-rule::before, .title-rule::after {
-      content: '';
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #b8943a, transparent);
-    }
-    .title-rule .star { font-size: 10px; }
-
-    /* PROGRESS */
     .progress-bar {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 24px 24px 12px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      z-index: 1;
+      max-width: 720px; margin: 0 auto; padding: 24px 24px 12px;
+      display: flex; align-items: center; position: relative; z-index: 1;
     }
     .progress-step { display: flex; align-items: center; gap: 8px; flex: 1; }
     .progress-dot {
@@ -227,130 +68,126 @@
     }
     .progress-dot.active {
       background: linear-gradient(135deg, #c8843a, #e0a040);
-      border-color: #c8843a;
-      color: #fff;
-      box-shadow: 0 0 16px #c8843a55;
+      border-color: #c8843a; color: #fff; box-shadow: 0 0 16px #c8843a55;
     }
     .progress-dot.done { background: #2a4020; border-color: #4a7a3a; color: #7abe6a; }
-    .progress-label { font-size: 11px; letter-spacing: 0.1em; color: #6b5530; text-transform: uppercase; white-space: nowrap; font-weight: 600; }
+    .progress-label {
+      font-size: 11px; letter-spacing: 0.1em; color: #6b5530;
+      text-transform: uppercase; white-space: nowrap; font-weight: 600;
+    }
     .progress-label.active { color: #e0a040; }
     .progress-line { flex: 1; height: 1px; background: #3a2818; margin-left: 8px; }
     .progress-line.done { background: #4a7a3a; }
-
-    /* FIELDS */
+    .container { max-width: 720px; margin: 0 auto; padding: 20px 24px; position: relative; z-index: 1; }
+    .parchment {
+      position: relative; background: #e8d5b0; border-radius: 4px;
+      padding: 40px 44px; color: #3a2a18;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 0 60px rgba(160,120,60,0.15), inset 0 0 120px rgba(120,80,30,0.08);
+      border: 1px solid #c4a872;
+    }
+    .parchment::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 4px;
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(180,140,70,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 90%, rgba(140,100,40,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(200,160,80,0.05) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .parchment::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 4px;
+      box-shadow: inset 0 0 30px rgba(100,60,20,0.2), inset 0 0 80px rgba(80,40,10,0.08);
+      pointer-events: none; z-index: 0;
+    }
+    .parchment > * { position: relative; z-index: 1; }
+    .card-title {
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900;
+      margin-bottom: 4px; color: #2a1a08; text-align: center;
+    }
+    .card-subtitle { font-size: 13px; color: #7a6040; margin-bottom: 28px; text-align: center; }
+    .title-rule {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 24px; color: #b8943a;
+    }
+    .title-rule::before, .title-rule::after {
+      content: ''; width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, #b8943a, transparent);
+    }
+    .title-rule .star { font-size: 10px; }
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .field { margin-bottom: 16px; }
     .field label {
       display: block; font-size: 10px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: #6a5030; margin-bottom: 6px;
-      font-weight: 700;
+      text-transform: uppercase; color: #6a5030; margin-bottom: 6px; font-weight: 700;
     }
     .field label .req { color: #b04020; }
-    .field label .hint { color: #8a7050; text-transform: none; letter-spacing: 0; font-style: italic; font-weight: 400; }
+    .field label .hint {
+      color: #8a7050; text-transform: none; letter-spacing: 0; font-style: italic; font-weight: 400;
+    }
     .field input, .field select {
-      width: 100%;
-      background: #f5e8cc;
-      border: 1px solid #c4a872;
-      border-radius: 4px;
-      padding: 11px 14px;
-      color: #2a1a08;
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%; background: #f5e8cc; border: 1px solid #c4a872; border-radius: 4px;
+      padding: 11px 14px; color: #2a1a08; font-size: 14px; font-family: Inter, sans-serif;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
       box-shadow: inset 0 1px 3px rgba(100,60,20,0.1);
     }
     .field input:focus, .field select:focus {
-      border-color: #b07828;
-      box-shadow: inset 0 1px 3px rgba(100,60,20,0.1), 0 0 0 3px #b0782822;
+      border-color: #b07828; box-shadow: inset 0 1px 3px rgba(100,60,20,0.1), 0 0 0 3px #b0782822;
     }
     .field input::placeholder { color: #b09870; }
     .field select {
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7050'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      background-color: #f5e8cc;
-      padding-right: 32px; cursor: pointer;
+      background-repeat: no-repeat; background-position: right 12px center;
+      background-color: #f5e8cc; padding-right: 32px; cursor: pointer;
     }
     .field select option { background: #f5e8cc; color: #2a1a08; }
-    .field input.error, .field select.error { border-color: #a03020; box-shadow: inset 0 1px 3px rgba(100,60,20,0.1), 0 0 0 3px #a0302022; }
+    .field input.error, .field select.error { border-color: #a03020; }
     .error-text { display: block; font-size: 11px; color: #a03020; margin-top: 4px; font-weight: 500; }
-    .error-banner { background: #f0d8c8; border: 1px solid #c07050; color: #8a3020; border-radius: 4px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
-
-    /* BUTTONS */
+    .error-banner {
+      background: #f0d8c8; border: 1px solid #c07050; color: #8a3020;
+      border-radius: 4px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px;
+    }
     .btn-primary {
-      width: 100%;
-      background: linear-gradient(135deg, #8a4a10, #a86018, #c87828);
-      color: #f8e8c8;
-      border: 2px solid #6a3a08;
-      border-radius: 5px;
-      padding: 14px 24px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin-top: 12px;
-      transition: all 0.2s;
+      width: 100%; background: linear-gradient(135deg, #8a4a10, #a86018, #c87828);
+      color: #f8e8c8; border: 2px solid #6a3a08; border-radius: 5px;
+      padding: 14px 24px; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+      margin-top: 12px; transition: all 0.2s;
       text-shadow: 0 1px 2px rgba(0,0,0,0.3);
       box-shadow: 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    .btn-primary:hover { filter: brightness(1.15); box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1); }
+    .btn-primary:hover { filter: brightness(1.15); }
     .btn-back {
-      background: #dcc8a0;
-      color: #5a4020;
-      border: 1px solid #c4a872;
-      border-radius: 5px;
-      padding: 14px 24px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 600;
+      background: #dcc8a0; color: #5a4020; border: 1px solid #c4a872;
+      border-radius: 5px; padding: 14px 24px; font-size: 13px;
+      cursor: pointer; transition: all 0.2s; font-weight: 600;
     }
     .btn-back:hover { background: #d0b890; border-color: #a08050; }
     .btn-submit {
-      flex: 1;
-      background: linear-gradient(135deg, #3a5a20, #4a7a2a, #5a8a3a);
-      color: #e8f0d8;
-      border: 2px solid #2a4018;
-      border-radius: 5px;
-      padding: 14px 24px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      flex: 1; background: linear-gradient(135deg, #3a5a20, #4a7a2a, #5a8a3a);
+      color: #e8f0d8; border: 2px solid #2a4018; border-radius: 5px;
+      padding: 14px 24px; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s; text-shadow: 0 1px 2px rgba(0,0,0,0.3);
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .btn-submit:hover { filter: brightness(1.15); }
     .nav-row { display: flex; gap: 12px; margin-top: 16px; align-items: center; }
-
-    /* TICKETS */
     .ticket-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
     .ticket-card {
-      background: #f5e8cc;
-      border: 2px solid #c4a872;
-      border-radius: 6px;
-      padding: 22px 18px;
-      cursor: pointer;
-      transition: all 0.2s;
-      position: relative;
+      background: #f5e8cc; border: 2px solid #c4a872; border-radius: 6px;
+      padding: 22px 18px; cursor: pointer; transition: all 0.2s;
     }
     .ticket-card:hover { border-color: #a07030; background: #f0e0bc; }
     .ticket-card.selected {
-      border-color: #8a4a10;
-      background: #f8e4b4;
+      border-color: #8a4a10; background: #f8e4b4;
       box-shadow: 0 0 0 3px #8a4a1022, inset 0 0 20px rgba(180,120,40,0.08);
     }
     .ticket-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .ticket-radio {
-      width: 18px; height: 18px; border-radius: 50%;
-      border: 2px solid #b09060;
+      width: 18px; height: 18px; border-radius: 50%; border: 2px solid #b09060;
       display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.2s;
     }
     .ticket-card.selected .ticket-radio { border-color: #8a4a10; }
     .ticket-radio-inner {
@@ -359,39 +196,28 @@
     }
     .ticket-card.selected .ticket-radio-inner { background: #8a4a10; }
     .popular-badge {
-      font-size: 9px; letter-spacing: 0.12em; color: #8a4a10;
-      font-weight: 700; text-transform: uppercase;
-      border: 1px solid #8a4a1066; padding: 2px 8px; border-radius: 3px;
-      background: #8a4a1011;
+      font-size: 9px; letter-spacing: 0.12em; color: #8a4a10; font-weight: 700;
+      text-transform: uppercase; border: 1px solid #8a4a1066;
+      padding: 2px 8px; border-radius: 3px; background: #8a4a1011;
     }
     .ticket-price {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px; font-weight: 700; margin-bottom: 4px;
-      color: #2a1a08;
+      font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700;
+      margin-bottom: 4px; color: #2a1a08;
     }
     .ticket-name { font-size: 13px; font-weight: 700; color: #5a3a10; margin-bottom: 8px; }
     .ticket-desc { font-size: 11px; color: #8a7050; line-height: 1.5; }
-
-    /* GUESTS */
     .guest-section { border-top: 2px solid #d4b880; padding-top: 24px; margin-top: 4px; }
     .guest-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: #2a1a08;
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      margin-bottom: 4px; color: #2a1a08;
     }
     .guest-subtitle { font-size: 12px; color: #8a7050; margin-bottom: 16px; }
     .guest-card {
-      background: #f0ddb8;
-      border: 1px solid #c4a872;
-      border-radius: 6px;
-      padding: 16px 18px;
-      margin-bottom: 10px;
-      position: relative;
+      background: #f0ddb8; border: 1px solid #c4a872; border-radius: 6px;
+      padding: 16px 18px; margin-bottom: 10px;
       box-shadow: inset 0 1px 4px rgba(100,60,20,0.06);
     }
-    .guest-card-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 12px;
-    }
+    .guest-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .guest-card-label {
       font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
       text-transform: uppercase; color: #6a5030;
@@ -399,8 +225,7 @@
     .guest-card-price { font-size: 13px; font-weight: 700; color: #5a3a10; }
     .guest-remove {
       background: none; border: none; color: #a06040; cursor: pointer;
-      font-size: 18px; line-height: 1; padding: 0 4px;
-      transition: color 0.2s; font-weight: 700;
+      font-size: 18px; line-height: 1; padding: 0 4px; font-weight: 700;
     }
     .guest-remove:hover { color: #a03020; }
     .guest-card .grid2 { margin-bottom: 0; }
@@ -408,26 +233,17 @@
     .guest-card .field:last-child { margin-bottom: 0; }
     .btn-add-guest {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%;
-      background: #f5e8cc;
-      border: 2px dashed #c4a872;
-      border-radius: 6px;
-      padding: 14px;
-      color: #8a6a30;
-      font-size: 13px; font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 6px;
+      width: 100%; background: #f5e8cc; border: 2px dashed #c4a872;
+      border-radius: 6px; padding: 14px; color: #8a6a30;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
     }
     .btn-add-guest:hover { border-color: #a07030; background: #f0e0bc; color: #6a4a10; }
     .btn-add-guest .plus { font-size: 18px; font-weight: 700; line-height: 1; }
     .guest-count-note { font-size: 11px; color: #8a7050; text-align: center; margin-top: 4px; }
-
-    /* ADDONS */
     .addon-section { border-top: 2px solid #d4b880; padding-top: 24px; margin-top: 20px; }
     .addon-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: #2a1a08;
+      font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+      margin-bottom: 4px; color: #2a1a08;
     }
     .addon-subtitle { font-size: 12px; color: #8a7050; margin-bottom: 16px; }
     .addon-card {
@@ -440,10 +256,8 @@
     .addon-card.locked { opacity: 0.4; cursor: not-allowed; }
     .addon-check { flex-shrink: 0; }
     .checkmark {
-      width: 20px; height: 20px;
-      background: linear-gradient(135deg, #8a4a10, #a86018);
-      border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; background: linear-gradient(135deg, #8a4a10, #a86018);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
       color: #fff; font-size: 11px; font-weight: 700;
     }
     .check-empty { width: 20px; height: 20px; border: 2px solid #c4a872; border-radius: 4px; background: #f5e8cc; }
@@ -453,18 +267,14 @@
       display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
     }
     .women-badge {
-      font-size: 9px; letter-spacing: 0.1em; color: #8a3870;
-      font-weight: 700; text-transform: uppercase;
-      border: 1px solid #8a387066; padding: 2px 5px; border-radius: 3px;
+      font-size: 9px; letter-spacing: 0.1em; color: #8a3870; font-weight: 700;
+      text-transform: uppercase; border: 1px solid #8a387066; padding: 2px 5px; border-radius: 3px;
     }
     .addon-desc { font-size: 11px; color: #8a7050; line-height: 1.4; }
     .addon-price { flex-shrink: 0; font-size: 15px; font-weight: 700; color: #3a2a10; }
-
-    /* REVIEW */
     .review-section {
-      background: #f0ddb8;
-      border: 1px solid #c4a872;
-      border-radius: 6px; padding: 18px 20px; margin-bottom: 14px;
+      background: #f0ddb8; border: 1px solid #c4a872; border-radius: 6px;
+      padding: 18px 20px; margin-bottom: 14px;
       box-shadow: inset 0 1px 4px rgba(100,60,20,0.08);
     }
     .review-header {
@@ -480,67 +290,49 @@
     .review-value { font-size: 12px; color: #2a1a08; font-weight: 600; text-align: right; max-width: 55%; }
     .order-line {
       display: flex; justify-content: space-between;
-      padding: 8px 0; border-bottom: 1px solid #dcc090;
-      font-size: 13px; color: #3a2a10;
+      padding: 8px 0; border-bottom: 1px solid #dcc090; font-size: 13px; color: #3a2a10;
     }
     .order-line:last-child { border-bottom: none; }
     .order-line-price { font-weight: 700; }
     .order-total {
       display: flex; justify-content: space-between;
-      padding: 14px 0 0; border-top: 2px solid #c4a872;
-      font-size: 15px; font-weight: 700;
+      padding: 14px 0 0; border-top: 2px solid #c4a872; font-size: 15px; font-weight: 700;
     }
     .order-total-price {
-      font-family: 'Playfair Display', serif;
-      color: #8a4a10; font-size: 24px;
+      font-family: 'Playfair Display', serif; color: #8a4a10; font-size: 24px;
     }
-
-    /* SUMMARY STRIP */
     .summary-strip {
       position: fixed; bottom: 0; left: 0; right: 0;
       background: linear-gradient(180deg, #2a1d10, #1a1008);
-      border-top: 2px solid #4a3520;
-      padding: 14px 24px;
-      display: flex; justify-content: space-between; align-items: center;
-      z-index: 100;
+      border-top: 2px solid #4a3520; padding: 14px 24px;
+      display: flex; justify-content: space-between; align-items: center; z-index: 100;
     }
     .summary-text { font-size: 13px; color: #a08860; }
     .summary-total {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 700; color: #e0a040;
+      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #e0a040;
     }
-
-    /* SUCCESS */
     .success-wrap { display: flex; align-items: center; justify-content: center; min-height: 80vh; }
     .success-parchment {
-      max-width: 480px; width: 100%;
-      background: #e8d5b0;
-      border: 1px solid #c4a872;
-      border-radius: 4px;
-      padding: 48px 40px; text-align: center;
-      margin: 40px auto; position: relative; overflow: hidden;
+      max-width: 480px; width: 100%; background: #e8d5b0; border: 1px solid #c4a872;
+      border-radius: 4px; padding: 48px 40px; text-align: center;
+      margin: 40px auto; position: relative; overflow: hidden; color: #3a2a18;
       box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 0 60px rgba(160,120,60,0.15);
-      color: #3a2a18;
     }
     .success-parchment::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      box-shadow: inset 0 0 30px rgba(100,60,20,0.2);
-      pointer-events: none;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      box-shadow: inset 0 0 30px rgba(100,60,20,0.2); pointer-events: none;
     }
     .success-parchment > * { position: relative; z-index: 1; }
     .success-longhorn { margin: 0 auto 20px; color: #c4a872; }
     .success-icon {
-      width: 56px; height: 56px;
-      background: linear-gradient(135deg, #3a5a20, #4a7a2a);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; background: linear-gradient(135deg, #3a5a20, #4a7a2a);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
       font-size: 22px; color: #e8f0d8; margin: 0 auto 20px;
       box-shadow: 0 4px 16px rgba(40,80,20,0.3);
     }
     .success-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px; font-weight: 900; margin-bottom: 10px; color: #2a1a08;
+      font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900;
+      margin-bottom: 10px; color: #2a1a08;
     }
     .success-text { font-size: 14px; color: #6a5030; margin-bottom: 6px; }
     .success-sub { font-size: 13px; color: #8a7050; }
@@ -549,24 +341,10 @@
       background: linear-gradient(90deg, transparent, #c4a872, transparent);
     }
     .success-amount {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px; color: #8a4a10; font-weight: 700;
+      font-family: 'Playfair Display', serif; font-size: 24px; color: #8a4a10; font-weight: 700;
     }
-
-    /* Pine tree decorations */
-    .trees-row {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-bottom: 8px;
-      color: #3a5a20;
-      opacity: 0.25;
-    }
-
-    /* STEPS */
     .step { display: none; }
     .step.active { display: block; }
-
     @media (max-width: 520px) {
       .parchment { padding: 28px 20px; }
       .grid2 { grid-template-columns: 1fr; }
@@ -579,7 +357,6 @@
 
 <div class="wood-bg"></div>
 
-<!-- HEADER -->
 <div class="mountain-header">
   <div class="header-inner">
     <div class="logo-area">
@@ -603,7 +380,6 @@
   </div>
 </div>
 
-<!-- PROGRESS -->
 <div class="progress-bar">
   <div class="progress-step">
     <div class="progress-dot active" id="dot-1">1</div>
@@ -622,51 +398,44 @@
 </div>
 
 <div class="container">
-
-  <!-- STEP 1 -->
   <div class="step active" id="step-1">
     <div class="parchment">
       <h2 class="card-title">Attendee Information</h2>
       <p class="card-subtitle">Tell us about yourself</p>
-      <div class="title-rule"><span class="star">✦</span></div>
-
+      <div class="title-rule"><span class="star">&#10022;</span></div>
       <div class="grid2">
         <div class="field">
           <label>First Name <span class="req">*</span></label>
-          <input type="text" id="firstName" placeholder="Jane" />
+          <input type="text" id="firstName" placeholder="Jane">
           <span class="error-text" id="err-firstName"></span>
         </div>
         <div class="field">
           <label>Last Name <span class="req">*</span></label>
-          <input type="text" id="lastName" placeholder="Smith" />
+          <input type="text" id="lastName" placeholder="Smith">
           <span class="error-text" id="err-lastName"></span>
         </div>
       </div>
-
       <div class="field">
-        <label>Preferred Name <span class="hint">— What should we put on your badge?</span></label>
-        <input type="text" id="preferredName" placeholder="e.g. JJ" />
+        <label>Preferred Name <span class="hint">- What should we put on your badge?</span></label>
+        <input type="text" id="preferredName" placeholder="e.g. JJ">
       </div>
-
       <div class="grid2">
         <div class="field">
           <label>Mobile Phone <span class="req">*</span></label>
-          <input type="tel" id="phone" placeholder="(555) 000-0000" />
+          <input type="tel" id="phone" placeholder="(555) 000-0000">
           <span class="error-text" id="err-phone"></span>
         </div>
         <div class="field">
           <label>Email Address <span class="req">*</span></label>
-          <input type="email" id="email" placeholder="jane@company.com" />
+          <input type="email" id="email" placeholder="jane@company.com">
           <span class="error-text" id="err-email"></span>
         </div>
       </div>
-
       <div class="field">
         <label>Company Name <span class="req">*</span></label>
-        <input type="text" id="company" placeholder="Your Brokerage or Company" />
+        <input type="text" id="company" placeholder="Your Brokerage or Company">
         <span class="error-text" id="err-company"></span>
       </div>
-
       <div class="grid2">
         <div class="field">
           <label>Gender <span class="req">*</span></label>
@@ -692,45 +461,41 @@
           <span class="error-text" id="err-fuseCount"></span>
         </div>
       </div>
-
-      <button class="btn-primary" onclick="goToStep2()">Continue to Tickets ★</button>
+      <button class="btn-primary" id="btn-step1">Continue to Tickets</button>
     </div>
   </div>
 
-  <!-- STEP 2 -->
   <div class="step" id="step-2">
     <div class="parchment">
       <h2 class="card-title">Select Your Ticket</h2>
-      <p class="card-subtitle">Choose the experience that's right for you</p>
-      <div class="title-rule"><span class="star">✦</span></div>
-
+      <p class="card-subtitle">Choose the experience that is right for you</p>
+      <div class="title-rule"><span class="star">&#10022;</span></div>
       <div id="ticket-error"></div>
-
       <div class="ticket-grid">
-        <div class="ticket-card" id="ticket-ga" onclick="selectTicket('ga', 499, 'General Admission')">
+        <div class="ticket-card" id="ticket-ga" data-id="ga" data-price="499" data-name="General Admission">
           <div class="ticket-top">
             <div class="ticket-radio"><div class="ticket-radio-inner" id="radio-ga"></div></div>
           </div>
           <div class="ticket-price">$499</div>
           <div class="ticket-name">General Admission</div>
-          <div class="ticket-desc">Full access to all Fuse 2026 sessions & networking events</div>
+          <div class="ticket-desc">Full access to all Fuse 2026 sessions and networking events</div>
         </div>
-        <div class="ticket-card" id="ticket-ga_plus" onclick="selectTicket('ga_plus', 699, 'General Admission Plus')">
+        <div class="ticket-card" id="ticket-ga_plus" data-id="ga_plus" data-price="699" data-name="General Admission Plus">
           <div class="ticket-top">
             <div class="ticket-radio"><div class="ticket-radio-inner" id="radio-ga_plus"></div></div>
-            <span class="popular-badge">★ POPULAR</span>
+            <span class="popular-badge">POPULAR</span>
           </div>
           <div class="ticket-price">$699</div>
           <div class="ticket-name">General Admission Plus</div>
-          <div class="ticket-desc">Everything in GA plus exclusive VIP lounge access & premium seating</div>
+          <div class="ticket-desc">Everything in GA plus exclusive VIP lounge access and premium seating</div>
         </div>
       </div>
 
       <div class="guest-section">
         <h3 class="guest-title">Bring a Guest</h3>
-        <p class="guest-subtitle">Guest tickets are $399 each — add as many as you'd like</p>
+        <p class="guest-subtitle">Guest tickets are $399 each - add as many as you like</p>
         <div id="guest-list"></div>
-        <button class="btn-add-guest" onclick="addGuest()">
+        <button class="btn-add-guest" id="btn-add-guest">
           <span class="plus">+</span> Add a Guest
         </button>
         <div class="guest-count-note" id="guest-count-note"></div>
@@ -739,8 +504,7 @@
       <div class="addon-section">
         <h3 class="addon-title">Add-Ons</h3>
         <p class="addon-subtitle">Enhance your Fuse experience</p>
-
-        <div class="addon-card" id="addon-hall_of_aime" onclick="toggleAddon('hall_of_aime', 349, 'Hall of AIME')">
+        <div class="addon-card" id="addon-hall_of_aime" data-id="hall_of_aime" data-price="349" data-name="Hall of AIME">
           <div class="addon-check" id="check-hall_of_aime"><div class="check-empty"></div></div>
           <div class="addon-info">
             <div class="addon-name">Hall of AIME</div>
@@ -748,36 +512,32 @@
           </div>
           <div class="addon-price">$349</div>
         </div>
-
-        <div class="addon-card" id="addon-wmn" onclick="toggleAddon('wmn', 0, 'WMN at Fuse')">
+        <div class="addon-card" id="addon-wmn" data-id="wmn" data-price="0" data-name="WMN at Fuse">
           <div class="addon-check" id="check-wmn"><div class="check-empty"></div></div>
           <div class="addon-info">
             <div class="addon-name">WMN at Fuse <span class="women-badge">Women Only</span></div>
-            <div class="addon-desc">Women's Mortgage Network exclusive gathering — open to women attendees only</div>
+            <div class="addon-desc">Womens Mortgage Network exclusive gathering - open to women attendees only</div>
           </div>
           <div class="addon-price" id="wmn-price">FREE</div>
         </div>
       </div>
 
       <div class="nav-row">
-        <button class="btn-back" onclick="goToStep(1)">← Back</button>
-        <button class="btn-primary" style="margin-top:0; flex:1;" onclick="goToStep3()">Review Order ★</button>
+        <button class="btn-back" id="btn-back-1">Back</button>
+        <button class="btn-primary" style="margin-top:0; flex:1;" id="btn-step2">Review Order</button>
       </div>
     </div>
   </div>
 
-  <!-- STEP 3 -->
   <div class="step" id="step-3">
     <div class="parchment">
       <h2 class="card-title">Review Your Order</h2>
       <p class="card-subtitle">Make sure everything looks right</p>
-      <div class="title-rule"><span class="star">✦</span></div>
-
+      <div class="title-rule"><span class="star">&#10022;</span></div>
       <div class="review-section">
         <div class="review-header">Attendee</div>
         <div id="review-attendee"></div>
       </div>
-
       <div class="review-section">
         <div class="review-header">Order Summary</div>
         <div id="review-order"></div>
@@ -786,15 +546,13 @@
           <span class="order-total-price" id="review-total"></span>
         </div>
       </div>
-
       <div class="nav-row">
-        <button class="btn-back" onclick="goToStep(2)">← Back</button>
-        <button class="btn-submit" onclick="submitForm()">Complete Registration ✦</button>
+        <button class="btn-back" id="btn-back-2">Back</button>
+        <button class="btn-submit" id="btn-submit">Complete Registration</button>
       </div>
     </div>
   </div>
 
-  <!-- SUCCESS -->
   <div class="step" id="step-success">
     <div class="success-wrap">
       <div class="success-parchment">
@@ -803,224 +561,339 @@
           <path d="M24 12C24 8 21 5 17 3C13 1 6 1 1 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
           <path d="M28 12C28 8 31 5 35 3C39 1 46 1 51 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
         </svg>
-        <div class="success-icon">✓</div>
-        <h2 class="success-title">You're Registered!</h2>
+        <div class="success-icon">&#10003;</div>
+        <h2 class="success-title">You are Registered!</h2>
         <p class="success-text">A confirmation has been sent to <strong id="success-email"></strong></p>
-        <p class="success-sub">We'll see you in Austin, Texas at Fuse 2026.</p>
+        <p class="success-sub">We will see you in Austin, Texas at Fuse 2026.</p>
         <div class="success-divider"></div>
         <p style="font-size:14px;color:#6a5030;">Order Total: <span class="success-amount" id="success-total"></span></p>
       </div>
     </div>
   </div>
-
 </div>
 
-<!-- SUMMARY STRIP -->
 <div class="summary-strip" id="summary-strip" style="display:none;">
   <span class="summary-text" id="summary-text"></span>
   <span class="summary-total" id="summary-total"></span>
 </div>
 
 <script>
-  let state = { step: 1, ticket: null, ticketPrice: 0, ticketName: '', addons: {}, guests: [], guestIdCounter: 0 };
+var state = {
+  step: 1,
+  ticket: null,
+  ticketPrice: 0,
+  ticketName: "",
+  addons: {},
+  guests: [],
+  nextGuestId: 0
+};
 
-  function goToStep(n) {
-    document.getElementById('step-' + state.step).classList.remove('active');
-    state.step = n;
-    document.getElementById('step-' + state.step).classList.add('active');
-    updateProgress(); updateStrip(); window.scrollTo(0,0);
-  }
+function goToStep(n) {
+  document.getElementById("step-" + state.step).classList.remove("active");
+  state.step = n;
+  document.getElementById("step-" + state.step).classList.add("active");
+  updateProgress();
+  updateStrip();
+  window.scrollTo(0, 0);
+}
 
-  function updateProgress() {
-    for (let i = 1; i <= 3; i++) {
-      const dot = document.getElementById('dot-' + i);
-      const lbl = document.getElementById('lbl-' + i);
-      const line = document.getElementById('line-' + i);
-      dot.classList.remove('active','done');
-      lbl.classList.remove('active');
-      if (line) line.classList.remove('done');
-      if (i < state.step) { dot.classList.add('done'); dot.innerHTML = '✓'; if (line) line.classList.add('done'); }
-      else if (i === state.step) { dot.classList.add('active'); dot.innerHTML = i; lbl.classList.add('active'); }
-      else { dot.innerHTML = i; }
+function updateProgress() {
+  for (var i = 1; i <= 3; i++) {
+    var dot = document.getElementById("dot-" + i);
+    var lbl = document.getElementById("lbl-" + i);
+    var line = document.getElementById("line-" + i);
+    dot.classList.remove("active", "done");
+    lbl.classList.remove("active");
+    if (line) line.classList.remove("done");
+    if (i < state.step) {
+      dot.classList.add("done");
+      dot.textContent = "\u2713";
+      if (line) line.classList.add("done");
+    } else if (i === state.step) {
+      dot.classList.add("active");
+      dot.textContent = i;
+      lbl.classList.add("active");
+    } else {
+      dot.textContent = i;
     }
   }
+}
 
-  function goToStep2() {
-    let valid = true;
-    [{ id:'firstName',msg:'Required' },{ id:'lastName',msg:'Required' },{ id:'phone',msg:'Required' },{ id:'company',msg:'Required' },{ id:'gender',msg:'Required' },{ id:'fuseCount',msg:'Required' }].forEach(f => {
-      const el = document.getElementById(f.id), err = document.getElementById('err-' + f.id);
-      if (!el.value.trim()) { err.textContent = f.msg; el.classList.add('error'); valid = false; }
-      else { err.textContent = ''; el.classList.remove('error'); }
-    });
-    const email = document.getElementById('email'), errEmail = document.getElementById('err-email');
-    if (!email.value.trim() || !/\S+@\S+\.\S+/.test(email.value)) { errEmail.textContent = 'Valid email required'; email.classList.add('error'); valid = false; }
-    else { errEmail.textContent = ''; email.classList.remove('error'); }
-    if (valid) { updateWmnAddon(); goToStep(2); }
+function getTotal() {
+  var t = state.ticketPrice;
+  var keys = Object.keys(state.addons);
+  for (var i = 0; i < keys.length; i++) {
+    t += state.addons[keys[i]].price;
   }
+  t += state.guests.length * 399;
+  return t;
+}
 
-  function updateWmnAddon() {
-    const gender = document.getElementById('gender').value;
-    const wmnCard = document.getElementById('addon-wmn');
-    if (gender !== 'female') {
-      wmnCard.classList.add('locked');
-      if (state.addons['wmn']) { delete state.addons['wmn']; document.getElementById('check-wmn').innerHTML = '<div class="check-empty"></div>'; wmnCard.classList.remove('selected'); }
-    } else { wmnCard.classList.remove('locked'); }
+function updateStrip() {
+  var strip = document.getElementById("summary-strip");
+  if (state.step === 2 && state.ticket) {
+    var ac = Object.keys(state.addons).length;
+    var gc = state.guests.length;
+    var parts = [state.ticketName];
+    if (gc > 0) parts.push(gc + " guest" + (gc > 1 ? "s" : ""));
+    if (ac > 0) parts.push(ac + " add-on" + (ac > 1 ? "s" : ""));
+    document.getElementById("summary-text").textContent = parts.join(" + ");
+    document.getElementById("summary-total").textContent = "$" + getTotal().toLocaleString();
+    strip.style.display = "flex";
+  } else {
+    strip.style.display = "none";
   }
+}
 
-  /* --- GUESTS --- */
-  function addGuest() {
-    const id = ++state.guestIdCounter;
-    state.guests.push({ id, firstName: '', lastName: '', email: '' });
-    renderGuests();
+function updateWmnAddon() {
+  var gender = document.getElementById("gender").value;
+  var wmnCard = document.getElementById("addon-wmn");
+  if (gender !== "female") {
+    wmnCard.classList.add("locked");
+    if (state.addons["wmn"]) {
+      delete state.addons["wmn"];
+      document.getElementById("check-wmn").innerHTML = "<div class=\"check-empty\"></div>";
+      wmnCard.classList.remove("selected");
+    }
+  } else {
+    wmnCard.classList.remove("locked");
+  }
+}
+
+function renderGuests() {
+  var list = document.getElementById("guest-list");
+  var html = "";
+  for (var i = 0; i < state.guests.length; i++) {
+    var g = state.guests[i];
+    var fn = g.firstName.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    var ln = g.lastName.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    var em = g.email.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    html += "<div class=\"guest-card\" data-guest-id=\"" + g.id + "\">";
+    html += "<div class=\"guest-card-header\">";
+    html += "<span class=\"guest-card-label\">Guest " + (i + 1) + "</span>";
+    html += "<div style=\"display:flex;align-items:center;gap:12px;\">";
+    html += "<span class=\"guest-card-price\">$399</span>";
+    html += "<button class=\"guest-remove\" data-remove=\"" + g.id + "\">&times;</button>";
+    html += "</div></div>";
+    html += "<div class=\"grid2\">";
+    html += "<div class=\"field\"><label>First Name <span class=\"req\">*</span></label>";
+    html += "<input type=\"text\" placeholder=\"First name\" value=\"" + fn + "\" data-guest-field=\"firstName\" data-guest-id=\"" + g.id + "\" id=\"guest-fn-" + g.id + "\">";
+    html += "<span class=\"error-text\" id=\"err-guest-fn-" + g.id + "\"></span></div>";
+    html += "<div class=\"field\"><label>Last Name <span class=\"req\">*</span></label>";
+    html += "<input type=\"text\" placeholder=\"Last name\" value=\"" + ln + "\" data-guest-field=\"lastName\" data-guest-id=\"" + g.id + "\" id=\"guest-ln-" + g.id + "\">";
+    html += "<span class=\"error-text\" id=\"err-guest-ln-" + g.id + "\"></span></div>";
+    html += "</div>";
+    html += "<div class=\"field\"><label>Email Address <span class=\"req\">*</span></label>";
+    html += "<input type=\"email\" placeholder=\"guest@email.com\" value=\"" + em + "\" data-guest-field=\"email\" data-guest-id=\"" + g.id + "\" id=\"guest-em-" + g.id + "\">";
+    html += "<span class=\"error-text\" id=\"err-guest-em-" + g.id + "\"></span></div>";
+    html += "</div>";
+  }
+  list.innerHTML = html;
+  var note = document.getElementById("guest-count-note");
+  if (state.guests.length > 0) {
+    note.textContent = state.guests.length + " guest" + (state.guests.length > 1 ? "s" : "") + " added - $" + (state.guests.length * 399).toLocaleString();
+  } else {
+    note.textContent = "";
+  }
+}
+
+function validateGuests() {
+  var valid = true;
+  for (var i = 0; i < state.guests.length; i++) {
+    var g = state.guests[i];
+    var fnEl = document.getElementById("guest-fn-" + g.id);
+    var lnEl = document.getElementById("guest-ln-" + g.id);
+    var emEl = document.getElementById("guest-em-" + g.id);
+    var eFn = document.getElementById("err-guest-fn-" + g.id);
+    var eLn = document.getElementById("err-guest-ln-" + g.id);
+    var eEm = document.getElementById("err-guest-em-" + g.id);
+    if (!g.firstName.trim()) {
+      eFn.textContent = "Required"; fnEl.classList.add("error"); valid = false;
+    } else {
+      eFn.textContent = ""; fnEl.classList.remove("error");
+    }
+    if (!g.lastName.trim()) {
+      eLn.textContent = "Required"; lnEl.classList.add("error"); valid = false;
+    } else {
+      eLn.textContent = ""; lnEl.classList.remove("error");
+    }
+    if (!g.email.trim() || !/\S+@\S+\.\S+/.test(g.email)) {
+      eEm.textContent = "Valid email required"; emEl.classList.add("error"); valid = false;
+    } else {
+      eEm.textContent = ""; emEl.classList.remove("error");
+    }
+  }
+  return valid;
+}
+
+// EVENT LISTENERS
+document.getElementById("btn-step1").addEventListener("click", function() {
+  var valid = true;
+  var fields = [
+    {id: "firstName", msg: "Required"},
+    {id: "lastName", msg: "Required"},
+    {id: "phone", msg: "Required"},
+    {id: "company", msg: "Required"},
+    {id: "gender", msg: "Required"},
+    {id: "fuseCount", msg: "Required"}
+  ];
+  for (var i = 0; i < fields.length; i++) {
+    var f = fields[i];
+    var el = document.getElementById(f.id);
+    var err = document.getElementById("err-" + f.id);
+    if (!el.value.trim()) {
+      err.textContent = f.msg; el.classList.add("error"); valid = false;
+    } else {
+      err.textContent = ""; el.classList.remove("error");
+    }
+  }
+  var emailEl = document.getElementById("email");
+  var errEmail = document.getElementById("err-email");
+  if (!emailEl.value.trim() || !/\S+@\S+\.\S+/.test(emailEl.value)) {
+    errEmail.textContent = "Valid email required"; emailEl.classList.add("error"); valid = false;
+  } else {
+    errEmail.textContent = ""; emailEl.classList.remove("error");
+  }
+  if (valid) {
+    updateWmnAddon();
+    goToStep(2);
+  }
+});
+
+document.getElementById("btn-step2").addEventListener("click", function() {
+  if (!state.ticket) {
+    document.getElementById("ticket-error").innerHTML = "<div class=\"error-banner\">Please select a ticket type</div>";
+    return;
+  }
+  if (!validateGuests()) return;
+  buildReview();
+  goToStep(3);
+});
+
+document.getElementById("btn-back-1").addEventListener("click", function() { goToStep(1); });
+document.getElementById("btn-back-2").addEventListener("click", function() { goToStep(2); });
+
+document.getElementById("btn-add-guest").addEventListener("click", function() {
+  state.nextGuestId++;
+  state.guests.push({id: state.nextGuestId, firstName: "", lastName: "", email: ""});
+  renderGuests();
+  updateStrip();
+});
+
+// Ticket clicks
+var ticketCards = document.querySelectorAll(".ticket-card");
+for (var tc = 0; tc < ticketCards.length; tc++) {
+  ticketCards[tc].addEventListener("click", function() {
+    var tid = this.getAttribute("data-id");
+    var tprice = parseInt(this.getAttribute("data-price"), 10);
+    var tname = this.getAttribute("data-name");
+    if (state.ticket) {
+      document.getElementById("ticket-" + state.ticket).classList.remove("selected");
+    }
+    state.ticket = tid;
+    state.ticketPrice = tprice;
+    state.ticketName = tname;
+    document.getElementById("ticket-" + tid).classList.add("selected");
+    document.getElementById("ticket-error").innerHTML = "";
     updateStrip();
-  }
+  });
+}
 
-  function removeGuest(id) {
-    state.guests = state.guests.filter(g => g.id !== id);
-    renderGuests();
+// Addon clicks
+var addonCards = document.querySelectorAll(".addon-card");
+for (var ac = 0; ac < addonCards.length; ac++) {
+  addonCards[ac].addEventListener("click", function() {
+    if (this.classList.contains("locked")) return;
+    var aid = this.getAttribute("data-id");
+    var aprice = parseInt(this.getAttribute("data-price"), 10);
+    var aname = this.getAttribute("data-name");
+    var check = document.getElementById("check-" + aid);
+    if (state.addons[aid]) {
+      delete state.addons[aid];
+      check.innerHTML = "<div class=\"check-empty\"></div>";
+      this.classList.remove("selected");
+    } else {
+      state.addons[aid] = {price: aprice, name: aname};
+      check.innerHTML = "<div class=\"checkmark\">&#10003;</div>";
+      this.classList.add("selected");
+    }
     updateStrip();
-  }
+  });
+}
 
-  function updateGuestField(id, field, value) {
-    const g = state.guests.find(g => g.id === id);
-    if (g) g[field] = value;
-  }
-
-  function renderGuests() {
-    var list = document.getElementById('guest-list');
-    var html = '';
+// Guest field input and remove via delegation
+document.getElementById("guest-list").addEventListener("input", function(e) {
+  var field = e.target.getAttribute("data-guest-field");
+  var gid = parseInt(e.target.getAttribute("data-guest-id"), 10);
+  if (field && gid) {
     for (var i = 0; i < state.guests.length; i++) {
-      var g = state.guests[i];
-      var fnVal = g.firstName.replace(/"/g, '&quot;');
-      var lnVal = g.lastName.replace(/"/g, '&quot;');
-      var emVal = g.email.replace(/"/g, '&quot;');
-      html += '<div class="guest-card" id="guest-card-' + g.id + '">';
-      html += '<div class="guest-card-header">';
-      html += '<span class="guest-card-label">Guest ' + (i + 1) + '</span>';
-      html += '<div style="display:flex;align-items:center;gap:12px;">';
-      html += '<span class="guest-card-price">$399</span>';
-      html += '<button class="guest-remove" onclick="removeGuest(' + g.id + ')" title="Remove guest">&times;</button>';
-      html += '</div></div>';
-      html += '<div class="grid2">';
-      html += '<div class="field"><label>First Name <span class="req">*</span></label>';
-      html += '<input type="text" placeholder="First name" value="' + fnVal + '" oninput="updateGuestField(' + g.id + ',\'firstName\',this.value)" id="guest-fn-' + g.id + '" />';
-      html += '<span class="error-text" id="err-guest-fn-' + g.id + '"></span></div>';
-      html += '<div class="field"><label>Last Name <span class="req">*</span></label>';
-      html += '<input type="text" placeholder="Last name" value="' + lnVal + '" oninput="updateGuestField(' + g.id + ',\'lastName\',this.value)" id="guest-ln-' + g.id + '" />';
-      html += '<span class="error-text" id="err-guest-ln-' + g.id + '"></span></div>';
-      html += '</div>';
-      html += '<div class="field"><label>Email Address <span class="req">*</span></label>';
-      html += '<input type="email" placeholder="guest@email.com" value="' + emVal + '" oninput="updateGuestField(' + g.id + ',\'email\',this.value)" id="guest-em-' + g.id + '" />';
-      html += '<span class="error-text" id="err-guest-em-' + g.id + '"></span></div>';
-      html += '</div>';
+      if (state.guests[i].id === gid) {
+        state.guests[i][field] = e.target.value;
+        break;
+      }
     }
-    list.innerHTML = html;
-    const note = document.getElementById('guest-count-note');
-    note.textContent = state.guests.length > 0 ? `${state.guests.length} guest${state.guests.length > 1 ? 's' : ''} added — ${(state.guests.length * 399).toLocaleString()}` : '';
   }
+});
 
-  function validateGuests() {
-    let valid = true;
-    state.guests.forEach(g => {
-      const fn = document.getElementById('guest-fn-' + g.id);
-      const ln = document.getElementById('guest-ln-' + g.id);
-      const em = document.getElementById('guest-em-' + g.id);
-      const eFn = document.getElementById('err-guest-fn-' + g.id);
-      const eLn = document.getElementById('err-guest-ln-' + g.id);
-      const eEm = document.getElementById('err-guest-em-' + g.id);
-      if (!g.firstName.trim()) { eFn.textContent = 'Required'; fn.classList.add('error'); valid = false; } else { eFn.textContent = ''; fn.classList.remove('error'); }
-      if (!g.lastName.trim()) { eLn.textContent = 'Required'; ln.classList.add('error'); valid = false; } else { eLn.textContent = ''; ln.classList.remove('error'); }
-      if (!g.email.trim() || !/\S+@\S+\.\S+/.test(g.email)) { eEm.textContent = 'Valid email required'; em.classList.add('error'); valid = false; } else { eEm.textContent = ''; em.classList.remove('error'); }
-    });
-    return valid;
-  }
-
-  function selectTicket(id, price, name) {
-    if (state.ticket) document.getElementById('ticket-' + state.ticket).classList.remove('selected');
-    state.ticket = id; state.ticketPrice = price; state.ticketName = name;
-    document.getElementById('ticket-' + id).classList.add('selected');
-    document.getElementById('ticket-error').innerHTML = '';
+document.getElementById("guest-list").addEventListener("click", function(e) {
+  var removeBtn = e.target.closest("[data-remove]");
+  if (removeBtn) {
+    var rid = parseInt(removeBtn.getAttribute("data-remove"), 10);
+    var newGuests = [];
+    for (var i = 0; i < state.guests.length; i++) {
+      if (state.guests[i].id !== rid) newGuests.push(state.guests[i]);
+    }
+    state.guests = newGuests;
+    renderGuests();
     updateStrip();
   }
+});
 
-  function toggleAddon(id, price, name) {
-    const card = document.getElementById('addon-' + id);
-    if (card.classList.contains('locked')) return;
-    const check = document.getElementById('check-' + id);
-    if (state.addons[id]) { delete state.addons[id]; check.innerHTML = '<div class="check-empty"></div>'; card.classList.remove('selected'); }
-    else { state.addons[id] = { price, name }; check.innerHTML = '<div class="checkmark">✓</div>'; card.classList.add('selected'); }
-    updateStrip();
-  }
+document.getElementById("btn-submit").addEventListener("click", function() {
+  document.getElementById("success-email").textContent = document.getElementById("email").value;
+  document.getElementById("success-total").textContent = "$" + getTotal().toLocaleString();
+  document.getElementById("step-3").classList.remove("active");
+  state.step = "success";
+  document.getElementById("step-success").classList.add("active");
+  document.getElementById("summary-strip").style.display = "none";
+  window.scrollTo(0, 0);
+});
 
-  function getTotal() { let t = state.ticketPrice; Object.values(state.addons).forEach(a => t += a.price); t += state.guests.length * 399; return t; }
+function buildReview() {
+  var genderMap = {male: "Male", female: "Female", prefer_not: "Prefer not to say"};
+  var fuseMap = {first: "This is my first Fuse"};
+  var fv = document.getElementById("fuseCount").value;
+  var pn = document.getElementById("preferredName").value;
+  var gv = document.getElementById("gender").value;
+  var rows = [];
+  rows.push(["Name", document.getElementById("firstName").value + " " + document.getElementById("lastName").value]);
+  if (pn) rows.push(["Badge Name", pn]);
+  rows.push(["Email", document.getElementById("email").value]);
+  rows.push(["Phone", document.getElementById("phone").value]);
+  rows.push(["Company", document.getElementById("company").value]);
+  rows.push(["Gender", genderMap[gv] || gv]);
+  rows.push(["Fuse Events Attended", fuseMap[fv] || fv]);
 
-  function updateStrip() {
-    const strip = document.getElementById('summary-strip');
-    if (state.step === 2 && state.ticket) {
-      const ac = Object.keys(state.addons).length;
-      const gc = state.guests.length;
-      let parts = [state.ticketName];
-      if (gc > 0) parts.push(`${gc} guest${gc > 1 ? 's' : ''}`);
-      if (ac > 0) parts.push(`${ac} add-on${ac > 1 ? 's' : ''}`);
-      document.getElementById('summary-text').textContent = parts.join(' + ');
-      document.getElementById('summary-total').textContent = '$' + getTotal().toLocaleString();
-      strip.style.display = 'flex';
-    } else { strip.style.display = 'none'; }
+  var ahtml = "";
+  for (var i = 0; i < rows.length; i++) {
+    ahtml += "<div class=\"review-row\"><span class=\"review-label\">" + rows[i][0] + "</span><span class=\"review-value\">" + rows[i][1] + "</span></div>";
   }
+  document.getElementById("review-attendee").innerHTML = ahtml;
 
-  function goToStep3() {
-    if (!state.ticket) { document.getElementById('ticket-error').innerHTML = '<div class="error-banner">Please select a ticket type</div>'; return; }
-    if (!validateGuests()) return;
-    buildReview(); goToStep(3);
+  var oh = "<div class=\"order-line\"><span>" + state.ticketName + "</span><span class=\"order-line-price\">$" + state.ticketPrice.toLocaleString() + "</span></div>";
+  for (var j = 0; j < state.guests.length; j++) {
+    var g = state.guests[j];
+    oh += "<div class=\"order-line\"><span>Guest: " + g.firstName + " " + g.lastName + "</span><span class=\"order-line-price\">$399</span></div>";
   }
-
-  function buildReview() {
-    const genderMap = { male:'Male', female:'Female', prefer_not:'Prefer not to say' };
-    const fuseMap = { first:'This is my first Fuse' };
-    const fv = document.getElementById('fuseCount').value, pn = document.getElementById('preferredName').value;
-    let rows = [
-      ['Name', document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value],
-      pn ? ['Badge Name', pn] : null,
-      ['Email', document.getElementById('email').value],
-      ['Phone', document.getElementById('phone').value],
-      ['Company', document.getElementById('company').value],
-      ['Gender', genderMap[document.getElementById('gender').value] || document.getElementById('gender').value],
-      ['Fuse Events Attended', fuseMap[fv] || fv],
-    ].filter(Boolean);
-    document.getElementById('review-attendee').innerHTML = rows.map(([l,v]) => `<div class="review-row"><span class="review-label">${l}</span><span class="review-value">${v}</span></div>`).join('');
-    let oh = `<div class="order-line"><span>${state.ticketName}</span><span class="order-line-price">${state.ticketPrice.toLocaleString()}</span></div>`;
-    state.guests.forEach((g, i) => { oh += `<div class="order-line"><span>Guest: ${g.firstName} ${g.lastName}</span><span class="order-line-price">$399</span></div>`; });
-    Object.values(state.addons).forEach(a => { oh += `<div class="order-line"><span>${a.name}</span><span class="order-line-price">${a.price === 0 ? 'FREE' : '
-    document.getElementById('review-order').innerHTML = oh;
-    document.getElementById('review-total').textContent = '$' + getTotal().toLocaleString();
+  var addonKeys = Object.keys(state.addons);
+  for (var k = 0; k < addonKeys.length; k++) {
+    var a = state.addons[addonKeys[k]];
+    var priceStr = a.price === 0 ? "FREE" : "$" + a.price.toLocaleString();
+    oh += "<div class=\"order-line\"><span>" + a.name + "</span><span class=\"order-line-price\">" + priceStr + "</span></div>";
   }
-
-  function submitForm() {
-    document.getElementById('success-email').textContent = document.getElementById('email').value;
-    document.getElementById('success-total').textContent = '$' + getTotal().toLocaleString();
-    document.getElementById('step-3').classList.remove('active');
-    state.step = 'success';
-    document.getElementById('step-success').classList.add('active');
-    document.getElementById('summary-strip').style.display = 'none';
-    window.scrollTo(0,0);
-  }
-</script>
-</body>
-</html>
- + a.price.toLocaleString()}</span></div>`; });
-    document.getElementById('review-order').innerHTML = oh;
-    document.getElementById('review-total').textContent = '$' + getTotal().toLocaleString();
-  }
-
-  function submitForm() {
-    document.getElementById('success-email').textContent = document.getElementById('email').value;
-    document.getElementById('success-total').textContent = '$' + getTotal().toLocaleString();
-    document.getElementById('step-3').classList.remove('active');
-    state.step = 'success';
-    document.getElementById('step-success').classList.add('active');
-    document.getElementById('summary-strip').style.display = 'none';
-    window.scrollTo(0,0);
-  }
+  document.getElementById("review-order").innerHTML = oh;
+  document.getElementById("review-total").textContent = "$" + getTotal().toLocaleString();
+}
 </script>
 </body>
 </html>
