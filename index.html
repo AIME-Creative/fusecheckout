@@ -10,113 +10,208 @@
 
     body {
       min-height: 100vh;
-      background: #1a120b;
+      background: #1a1008;
       font-family: 'Inter', sans-serif;
-      color: #f5e6d3;
+      color: #3a2a18;
       padding-bottom: 100px;
       position: relative;
     }
-    body::before {
-      content: '';
+
+    /* Dark wood background */
+    .wood-bg {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(ellipse at 20% 0%, rgba(180,100,30,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 100%, rgba(180,100,30,0.05) 0%, transparent 60%);
-      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px, transparent 18px,
+          rgba(0,0,0,0.03) 18px, rgba(0,0,0,0.03) 20px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px, transparent 45px,
+          rgba(0,0,0,0.02) 45px, rgba(0,0,0,0.02) 46px
+        ),
+        linear-gradient(180deg,
+          #1a1008 0%,
+          #231810 20%,
+          #2a1d12 50%,
+          #1e150e 80%,
+          #140e08 100%
+        );
       z-index: 0;
     }
 
-    /* Leather texture overlay */
-    .leather-bg {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      opacity: 0.03;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a574' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* HEADER */
-    .header {
-      border-bottom: 1px solid #3d2b1a;
+    /* Mountain silhouette header */
+    .mountain-header {
       position: relative;
       z-index: 1;
-      background: linear-gradient(180deg, #1a120b 0%, #1a120bcc 100%);
+      background: linear-gradient(180deg, #0e0a05 0%, #1a1208 60%, transparent 100%);
+      padding-bottom: 30px;
+      overflow: hidden;
     }
+    .mountain-scene {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      overflow: hidden;
+    }
+    .mountain-scene svg { width: 100%; height: 100%; }
+
     .header-inner {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 32px 24px 24px;
+      padding: 28px 24px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
+      z-index: 2;
     }
     .logo-area { display: flex; align-items: center; gap: 14px; }
     .logo-fuse {
       font-family: 'Playfair Display', serif;
-      font-size: 44px;
+      font-size: 46px;
       font-weight: 900;
       letter-spacing: 0.15em;
-      color: #f5e6d3;
+      color: #e8c87a;
       line-height: 1;
-      position: relative;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
     .logo-year {
       font-size: 13px;
       letter-spacing: 0.35em;
-      color: #c8843a;
+      color: #c8943a;
       font-weight: 700;
       padding: 3px 8px;
-      border: 1px solid #c8843a44;
+      border: 1px solid #c8943a66;
       border-radius: 3px;
     }
-    .header-right { display: flex; align-items: center; gap: 14px; }
     .header-city {
       font-size: 11px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #8b7355;
+      color: #8a7555;
     }
 
-    /* Longhorn SVG divider */
-    .header-accent {
-      height: 36px;
+    /* Longhorn divider */
+    .longhorn-divider {
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 6px 24px;
       position: relative;
-      overflow: hidden;
+      z-index: 2;
     }
-    .header-accent::before, .header-accent::after {
+    .longhorn-divider::before, .longhorn-divider::after {
       content: '';
       flex: 1;
+      max-width: 280px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, #5a3a1a, transparent);
+      background: linear-gradient(90deg, transparent, #5a4020, transparent);
     }
-    .longhorn-icon {
-      margin: 0 16px;
-      color: #c8843a;
-      flex-shrink: 0;
+    .longhorn-icon { margin: 0 16px; color: #c8943a; flex-shrink: 0; }
+
+    /* PARCHMENT CARD */
+    .container { max-width: 720px; margin: 0 auto; padding: 20px 24px; position: relative; z-index: 1; }
+
+    .parchment {
+      position: relative;
+      background: #e8d5b0;
+      border-radius: 4px;
+      padding: 40px 44px;
+      color: #3a2a18;
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.5),
+        inset 0 0 60px rgba(160,120,60,0.15),
+        inset 0 0 120px rgba(120,80,30,0.08);
+      border: 1px solid #c4a872;
+    }
+    /* Parchment texture */
+    .parchment::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 4px;
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(180,140,70,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 90%, rgba(140,100,40,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(200,160,80,0.05) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Burnt/aged edges */
+    .parchment::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 4px;
+      box-shadow:
+        inset 0 0 30px rgba(100,60,20,0.2),
+        inset 0 0 80px rgba(80,40,10,0.08);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .parchment > * { position: relative; z-index: 1; }
+
+    /* Torn edge top */
+    .torn-edge-top {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+      height: 16px;
+      overflow: hidden;
+    }
+    .torn-edge-top-inner {
+      height: 16px;
+      background: #e8d5b0;
+      border-radius: 4px 4px 0 0;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='16'%3E%3Cpath d='M0,0 L700,0 L700,16 Q680,8 660,14 Q640,6 620,12 Q600,5 580,13 Q560,7 540,11 Q520,4 500,14 Q480,6 460,12 Q440,8 420,13 Q400,5 380,11 Q360,7 340,14 Q320,5 300,12 Q280,8 260,13 Q240,4 220,11 Q200,7 180,14 Q160,5 140,12 Q120,8 100,13 Q80,5 60,11 Q40,7 20,14 Q10,6 0,16 Z' fill='white'/%3E%3C/svg%3E");
+      mask-size: 100% 100%;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='16'%3E%3Cpath d='M0,0 L700,0 L700,16 Q680,8 660,14 Q640,6 620,12 Q600,5 580,13 Q560,7 540,11 Q520,4 500,14 Q480,6 460,12 Q440,8 420,13 Q400,5 380,11 Q360,7 340,14 Q320,5 300,12 Q280,8 260,13 Q240,4 220,11 Q200,7 180,14 Q160,5 140,12 Q120,8 100,13 Q80,5 60,11 Q40,7 20,14 Q10,6 0,16 Z' fill='white'/%3E%3C/svg%3E");
+      -webkit-mask-size: 100% 100%;
     }
 
-    /* Star decorations */
-    .star-divider {
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 4px;
+      color: #2a1a08;
+      text-align: center;
+    }
+    .card-subtitle {
+      font-size: 13px;
+      color: #7a6040;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    /* Decorative rule under title */
+    .title-rule {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      padding: 8px 0;
-      color: #5a3a1a;
-      font-size: 8px;
-      letter-spacing: 6px;
+      gap: 10px;
+      margin-bottom: 24px;
+      color: #b8943a;
     }
+    .title-rule::before, .title-rule::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #b8943a, transparent);
+    }
+    .title-rule .star { font-size: 10px; }
 
     /* PROGRESS */
     .progress-bar {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 24px 24px 8px;
+      padding: 24px 24px 12px;
       display: flex;
       align-items: center;
       position: relative;
@@ -125,104 +220,71 @@
     .progress-step { display: flex; align-items: center; gap: 8px; flex: 1; }
     .progress-dot {
       width: 30px; height: 30px; border-radius: 50%;
-      background: #2a1d10; border: 2px solid #3d2b1a;
+      background: #2a1d10; border: 2px solid #4a3520;
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: #8b7355; font-weight: 600;
+      font-size: 11px; color: #8a7555; font-weight: 600;
       flex-shrink: 0; transition: all 0.3s;
     }
     .progress-dot.active {
-      background: linear-gradient(135deg, #c8843a, #e09b4a);
+      background: linear-gradient(135deg, #c8843a, #e0a040);
       border-color: #c8843a;
       color: #fff;
-      box-shadow: 0 0 16px #c8843a44;
+      box-shadow: 0 0 16px #c8843a55;
     }
-    .progress-dot.done { background: #2a3d20; border-color: #4a7a3a; color: #7abe6a; }
-    .progress-label { font-size: 11px; letter-spacing: 0.1em; color: #6b5740; text-transform: uppercase; white-space: nowrap; font-weight: 500; }
-    .progress-label.active { color: #c8843a; }
-    .progress-line { flex: 1; height: 1px; background: #3d2b1a; margin-left: 8px; }
+    .progress-dot.done { background: #2a4020; border-color: #4a7a3a; color: #7abe6a; }
+    .progress-label { font-size: 11px; letter-spacing: 0.1em; color: #6b5530; text-transform: uppercase; white-space: nowrap; font-weight: 600; }
+    .progress-label.active { color: #e0a040; }
+    .progress-line { flex: 1; height: 1px; background: #3a2818; margin-left: 8px; }
     .progress-line.done { background: #4a7a3a; }
-
-    /* CONTAINER & CARD */
-    .container { max-width: 700px; margin: 0 auto; padding: 20px 24px; position: relative; z-index: 1; }
-    .card {
-      background: linear-gradient(180deg, #231810 0%, #1e150e 100%);
-      border: 1px solid #3d2b1a;
-      border-radius: 12px;
-      padding: 36px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #c8843a, #e09b4a, #c8843a, transparent);
-    }
-    /* Corner brand accents */
-    .card::after {
-      content: '✦';
-      position: absolute;
-      top: 14px; right: 18px;
-      color: #3d2b1a;
-      font-size: 12px;
-    }
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #f5e6d3;
-    }
-    .card-subtitle { font-size: 13px; color: #8b7355; margin-bottom: 28px; }
 
     /* FIELDS */
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .field { margin-bottom: 18px; }
+    .field { margin-bottom: 16px; }
     .field label {
       display: block; font-size: 10px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: #a08968; margin-bottom: 7px;
-      font-weight: 600;
+      text-transform: uppercase; color: #6a5030; margin-bottom: 6px;
+      font-weight: 700;
     }
-    .field label .req { color: #c8843a; }
-    .field label .hint { color: #6b5740; text-transform: none; letter-spacing: 0; font-style: italic; font-weight: 400; }
+    .field label .req { color: #b04020; }
+    .field label .hint { color: #8a7050; text-transform: none; letter-spacing: 0; font-style: italic; font-weight: 400; }
     .field input, .field select {
       width: 100%;
-      background: #1a120b;
-      border: 1px solid #3d2b1a;
-      border-radius: 6px;
+      background: #f5e8cc;
+      border: 1px solid #c4a872;
+      border-radius: 4px;
       padding: 11px 14px;
-      color: #f5e6d3;
+      color: #2a1a08;
       font-size: 14px;
       font-family: 'Inter', sans-serif;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: inset 0 1px 3px rgba(100,60,20,0.1);
     }
     .field input:focus, .field select:focus {
-      border-color: #c8843a;
-      box-shadow: 0 0 0 3px #c8843a22;
+      border-color: #b07828;
+      box-shadow: inset 0 1px 3px rgba(100,60,20,0.1), 0 0 0 3px #b0782822;
     }
-    .field input::placeholder { color: #5a4530; }
+    .field input::placeholder { color: #b09870; }
     .field select {
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b7355'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7050'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 12px center;
-      background-color: #1a120b;
+      background-color: #f5e8cc;
       padding-right: 32px; cursor: pointer;
     }
-    .field select option { background: #1a120b; color: #f5e6d3; }
-    .field input.error, .field select.error { border-color: #a03020; box-shadow: 0 0 0 3px #a0302022; }
-    .error-text { display: block; font-size: 11px; color: #d05040; margin-top: 4px; }
-    .error-banner { background: #2a1510; border: 1px solid #5a2a1a; color: #d07060; border-radius: 6px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
+    .field select option { background: #f5e8cc; color: #2a1a08; }
+    .field input.error, .field select.error { border-color: #a03020; box-shadow: inset 0 1px 3px rgba(100,60,20,0.1), 0 0 0 3px #a0302022; }
+    .error-text { display: block; font-size: 11px; color: #a03020; margin-top: 4px; font-weight: 500; }
+    .error-banner { background: #f0d8c8; border: 1px solid #c07050; color: #8a3020; border-radius: 4px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
 
     /* BUTTONS */
     .btn-primary {
       width: 100%;
-      background: linear-gradient(135deg, #b8722e, #c8843a, #d89a4a);
-      color: #fff;
-      border: none;
-      border-radius: 7px;
+      background: linear-gradient(135deg, #8a4a10, #a86018, #c87828);
+      color: #f8e8c8;
+      border: 2px solid #6a3a08;
+      border-radius: 5px;
       padding: 14px 24px;
       font-size: 13px;
       font-weight: 700;
@@ -231,28 +293,28 @@
       cursor: pointer;
       margin-top: 12px;
       transition: all 0.2s;
-      position: relative;
-      overflow: hidden;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    .btn-primary:hover { filter: brightness(1.1); box-shadow: 0 4px 20px #c8843a44; }
+    .btn-primary:hover { filter: brightness(1.15); box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1); }
     .btn-back {
-      background: transparent;
-      color: #8b7355;
-      border: 1px solid #3d2b1a;
-      border-radius: 7px;
+      background: #dcc8a0;
+      color: #5a4020;
+      border: 1px solid #c4a872;
+      border-radius: 5px;
       padding: 14px 24px;
       font-size: 13px;
       cursor: pointer;
       transition: all 0.2s;
-      font-weight: 500;
+      font-weight: 600;
     }
-    .btn-back:hover { border-color: #5a3a1a; color: #c8a060; }
+    .btn-back:hover { background: #d0b890; border-color: #a08050; }
     .btn-submit {
       flex: 1;
-      background: linear-gradient(135deg, #3a6a2a, #4a8a3a);
-      color: #fff;
-      border: none;
-      border-radius: 7px;
+      background: linear-gradient(135deg, #3a5a20, #4a7a2a, #5a8a3a);
+      color: #e8f0d8;
+      border: 2px solid #2a4018;
+      border-radius: 5px;
       padding: 14px 24px;
       font-size: 13px;
       font-weight: 700;
@@ -260,211 +322,232 @@
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    .btn-submit:hover { filter: brightness(1.1); box-shadow: 0 4px 20px #4a8a3a44; }
-    .nav-row { display: flex; gap: 12px; margin-top: 12px; align-items: center; }
+    .btn-submit:hover { filter: brightness(1.15); }
+    .nav-row { display: flex; gap: 12px; margin-top: 16px; align-items: center; }
 
     /* TICKETS */
     .ticket-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
     .ticket-card {
-      background: #1a120b;
-      border: 2px solid #3d2b1a;
-      border-radius: 10px;
+      background: #f5e8cc;
+      border: 2px solid #c4a872;
+      border-radius: 6px;
       padding: 22px 18px;
       cursor: pointer;
       transition: all 0.2s;
       position: relative;
     }
-    .ticket-card:hover { border-color: #5a3a1a; }
+    .ticket-card:hover { border-color: #a07030; background: #f0e0bc; }
     .ticket-card.selected {
-      border-color: #c8843a;
-      background: linear-gradient(135deg, #2a1d10, #251a0e);
-      box-shadow: 0 0 24px #c8843a18;
+      border-color: #8a4a10;
+      background: #f8e4b4;
+      box-shadow: 0 0 0 3px #8a4a1022, inset 0 0 20px rgba(180,120,40,0.08);
     }
     .ticket-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .ticket-radio {
       width: 18px; height: 18px; border-radius: 50%;
-      border: 2px solid #5a3a1a;
+      border: 2px solid #b09060;
       display: flex; align-items: center; justify-content: center;
       transition: border-color 0.2s;
     }
-    .ticket-card.selected .ticket-radio { border-color: #c8843a; }
+    .ticket-card.selected .ticket-radio { border-color: #8a4a10; }
     .ticket-radio-inner {
       width: 8px; height: 8px; border-radius: 50%;
       background: transparent; transition: background 0.2s;
     }
-    .ticket-card.selected .ticket-radio-inner { background: #c8843a; }
+    .ticket-card.selected .ticket-radio-inner { background: #8a4a10; }
     .popular-badge {
-      font-size: 9px; letter-spacing: 0.15em; color: #c8843a;
+      font-size: 9px; letter-spacing: 0.12em; color: #8a4a10;
       font-weight: 700; text-transform: uppercase;
-      border: 1px solid #c8843a55; padding: 2px 8px; border-radius: 3px;
-      background: #c8843a11;
+      border: 1px solid #8a4a1066; padding: 2px 8px; border-radius: 3px;
+      background: #8a4a1011;
     }
     .ticket-price {
       font-family: 'Playfair Display', serif;
       font-size: 30px; font-weight: 700; margin-bottom: 4px;
-      color: #f5e6d3;
+      color: #2a1a08;
     }
-    .ticket-name { font-size: 13px; font-weight: 600; color: #c8a060; margin-bottom: 8px; }
-    .ticket-desc { font-size: 11px; color: #7a6548; line-height: 1.5; }
+    .ticket-name { font-size: 13px; font-weight: 700; color: #5a3a10; margin-bottom: 8px; }
+    .ticket-desc { font-size: 11px; color: #8a7050; line-height: 1.5; }
 
     /* ADDONS */
-    .addon-section { border-top: 1px solid #3d2b1a; padding-top: 24px; }
+    .addon-section { border-top: 2px solid #d4b880; padding-top: 24px; margin-top: 4px; }
     .addon-title {
       font-family: 'Playfair Display', serif;
-      font-size: 16px; font-weight: 700; margin-bottom: 4px;
+      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: #2a1a08;
     }
-    .addon-subtitle { font-size: 12px; color: #8b7355; margin-bottom: 16px; }
+    .addon-subtitle { font-size: 12px; color: #8a7050; margin-bottom: 16px; }
     .addon-card {
       display: flex; align-items: center; gap: 14px;
-      background: #1a120b; border: 2px solid #3d2b1a; border-radius: 8px;
+      background: #f5e8cc; border: 2px solid #c4a872; border-radius: 6px;
       padding: 14px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s;
     }
-    .addon-card:hover:not(.locked) { border-color: #5a3a1a; }
-    .addon-card.selected { border-color: #c8843a; background: #2a1d10; }
-    .addon-card.locked { opacity: 0.35; cursor: not-allowed; }
+    .addon-card:hover:not(.locked) { border-color: #a07030; }
+    .addon-card.selected { border-color: #8a4a10; background: #f8e4b4; }
+    .addon-card.locked { opacity: 0.4; cursor: not-allowed; }
     .addon-check { flex-shrink: 0; }
     .checkmark {
       width: 20px; height: 20px;
-      background: linear-gradient(135deg, #b8722e, #c8843a);
+      background: linear-gradient(135deg, #8a4a10, #a86018);
       border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-size: 11px; font-weight: 700;
     }
-    .check-empty { width: 20px; height: 20px; border: 2px solid #3d2b1a; border-radius: 4px; }
+    .check-empty { width: 20px; height: 20px; border: 2px solid #c4a872; border-radius: 4px; background: #f5e8cc; }
     .addon-info { flex: 1; }
     .addon-name {
-      font-size: 13px; font-weight: 600; color: #e0c8a0; margin-bottom: 2px;
+      font-size: 13px; font-weight: 700; color: #3a2a10; margin-bottom: 2px;
       display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
     }
     .women-badge {
-      font-size: 9px; letter-spacing: 0.1em; color: #c47ab8;
+      font-size: 9px; letter-spacing: 0.1em; color: #8a3870;
       font-weight: 700; text-transform: uppercase;
-      border: 1px solid #c47ab855; padding: 2px 5px; border-radius: 3px;
-      background: #c47ab811;
+      border: 1px solid #8a387066; padding: 2px 5px; border-radius: 3px;
     }
-    .addon-desc { font-size: 11px; color: #7a6548; line-height: 1.4; }
-    .addon-price { flex-shrink: 0; font-size: 15px; font-weight: 700; color: #f5e6d3; }
-    .addon-price.locked-price { font-size: 11px; color: #5a4530; }
+    .addon-desc { font-size: 11px; color: #8a7050; line-height: 1.4; }
+    .addon-price { flex-shrink: 0; font-size: 15px; font-weight: 700; color: #3a2a10; }
 
     /* REVIEW */
     .review-section {
-      background: #1a120b; border: 1px solid #3d2b1a;
-      border-radius: 8px; padding: 18px 20px; margin-bottom: 14px;
+      background: #f0ddb8;
+      border: 1px solid #c4a872;
+      border-radius: 6px; padding: 18px 20px; margin-bottom: 14px;
+      box-shadow: inset 0 1px 4px rgba(100,60,20,0.08);
     }
     .review-header {
       font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: #8b7355; margin-bottom: 12px; font-weight: 600;
+      color: #7a6040; margin-bottom: 12px; font-weight: 700;
     }
     .review-row {
       display: flex; justify-content: space-between;
-      padding: 7px 0; border-bottom: 1px solid #2a1d10;
+      padding: 7px 0; border-bottom: 1px solid #dcc090;
     }
-    .review-label { font-size: 12px; color: #8b7355; }
-    .review-value { font-size: 12px; color: #e0c8a0; font-weight: 600; text-align: right; max-width: 55%; }
+    .review-row:last-child { border-bottom: none; }
+    .review-label { font-size: 12px; color: #7a6040; }
+    .review-value { font-size: 12px; color: #2a1a08; font-weight: 600; text-align: right; max-width: 55%; }
     .order-line {
       display: flex; justify-content: space-between;
-      padding: 8px 0; border-bottom: 1px solid #2a1d10;
-      font-size: 13px; color: #c8a060;
+      padding: 8px 0; border-bottom: 1px solid #dcc090;
+      font-size: 13px; color: #3a2a10;
     }
-    .order-line-price { font-weight: 600; }
+    .order-line:last-child { border-bottom: none; }
+    .order-line-price { font-weight: 700; }
     .order-total {
       display: flex; justify-content: space-between;
-      padding: 14px 0 0;
+      padding: 14px 0 0; border-top: 2px solid #c4a872;
       font-size: 15px; font-weight: 700;
     }
     .order-total-price {
       font-family: 'Playfair Display', serif;
-      color: #e09b4a; font-size: 22px;
+      color: #8a4a10; font-size: 24px;
     }
 
     /* SUMMARY STRIP */
     .summary-strip {
       position: fixed; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(180deg, #231810, #1a120b);
-      border-top: 1px solid #3d2b1a;
+      background: linear-gradient(180deg, #2a1d10, #1a1008);
+      border-top: 2px solid #4a3520;
       padding: 14px 24px;
       display: flex; justify-content: space-between; align-items: center;
       z-index: 100;
     }
-    .summary-text { font-size: 13px; color: #8b7355; }
+    .summary-text { font-size: 13px; color: #a08860; }
     .summary-total {
       font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 700; color: #e09b4a;
+      font-size: 20px; font-weight: 700; color: #e0a040;
     }
 
     /* SUCCESS */
     .success-wrap { display: flex; align-items: center; justify-content: center; min-height: 80vh; }
-    .success-card {
-      max-width: 460px; width: 100%;
-      background: linear-gradient(180deg, #231810, #1e150e);
-      border: 1px solid #3d2b1a;
-      border-radius: 12px; padding: 48px 40px; text-align: center;
+    .success-parchment {
+      max-width: 480px; width: 100%;
+      background: #e8d5b0;
+      border: 1px solid #c4a872;
+      border-radius: 4px;
+      padding: 48px 40px; text-align: center;
       margin: 40px auto; position: relative; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 0 60px rgba(160,120,60,0.15);
+      color: #3a2a18;
     }
-    .success-card::before {
+    .success-parchment::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #4a8a3a, #6aba5a, #4a8a3a, transparent);
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      box-shadow: inset 0 0 30px rgba(100,60,20,0.2);
+      pointer-events: none;
     }
+    .success-parchment > * { position: relative; z-index: 1; }
+    .success-longhorn { margin: 0 auto 20px; color: #c4a872; }
     .success-icon {
-      width: 60px; height: 60px;
-      background: linear-gradient(135deg, #3a6a2a, #4a8a3a);
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, #3a5a20, #4a7a2a);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 24px; color: #fff; margin: 0 auto 20px;
-      box-shadow: 0 4px 20px #4a8a3a33;
+      font-size: 22px; color: #e8f0d8; margin: 0 auto 20px;
+      box-shadow: 0 4px 16px rgba(40,80,20,0.3);
     }
     .success-title {
       font-family: 'Playfair Display', serif;
-      font-size: 26px; font-weight: 700; margin-bottom: 10px;
+      font-size: 28px; font-weight: 900; margin-bottom: 10px; color: #2a1a08;
     }
-    .success-text { font-size: 14px; color: #8b7355; margin-bottom: 6px; }
-    .success-sub { font-size: 13px; color: #6b5740; }
-    .success-divider { height: 1px; background: #3d2b1a; margin: 24px 0; }
+    .success-text { font-size: 14px; color: #6a5030; margin-bottom: 6px; }
+    .success-sub { font-size: 13px; color: #8a7050; }
+    .success-divider {
+      height: 2px; margin: 24px 40px;
+      background: linear-gradient(90deg, transparent, #c4a872, transparent);
+    }
     .success-amount {
       font-family: 'Playfair Display', serif;
-      font-size: 22px; color: #e09b4a; font-weight: 700;
+      font-size: 24px; color: #8a4a10; font-weight: 700;
     }
-    /* Longhorn on success */
-    .success-longhorn { margin: 0 auto 24px; color: #3d2b1a; }
+
+    /* Pine tree decorations */
+    .trees-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      color: #3a5a20;
+      opacity: 0.25;
+    }
 
     /* STEPS */
     .step { display: none; }
     .step.active { display: block; }
 
     @media (max-width: 520px) {
-      .card { padding: 24px 18px; }
+      .parchment { padding: 28px 20px; }
       .grid2 { grid-template-columns: 1fr; }
       .ticket-grid { grid-template-columns: 1fr; }
-      .logo-fuse { font-size: 32px; }
-      .header-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .header-right { align-self: flex-start; }
+      .logo-fuse { font-size: 34px; }
     }
   </style>
 </head>
 <body>
 
-<div class="leather-bg"></div>
+<div class="wood-bg"></div>
 
 <!-- HEADER -->
-<div class="header">
+<div class="mountain-header">
   <div class="header-inner">
     <div class="logo-area">
       <span class="logo-fuse">FUSE</span>
       <span class="logo-year">2026</span>
     </div>
-    <div class="header-right">
-      <span class="header-city">Austin, Texas</span>
-    </div>
+    <span class="header-city">Austin, Texas</span>
   </div>
-  <div class="header-accent">
-    <svg class="longhorn-icon" width="48" height="22" viewBox="0 0 48 22" fill="none">
-      <path d="M24 18C24 18 22 14 22 11C22 8 23 6 24 5C25 6 26 8 26 11C26 14 24 18 24 18Z" fill="currentColor" opacity="0.6"/>
-      <path d="M22 11C22 8 20 5 16 3C12 1 6 1 1 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M26 11C26 8 28 5 32 3C36 1 42 1 47 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <circle cx="24" cy="20" r="1.5" fill="currentColor" opacity="0.4"/>
+  <div class="longhorn-divider">
+    <svg class="longhorn-icon" width="52" height="24" viewBox="0 0 52 24" fill="none">
+      <path d="M26 20C26 20 24 15 24 12C24 8 25 6 26 5C27 6 28 8 28 12C28 15 26 20 26 20Z" fill="currentColor" opacity="0.5"/>
+      <path d="M24 12C24 8 21 5 17 3C13 1 6 1 1 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M28 12C28 8 31 5 35 3C39 1 46 1 51 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="mountain-scene">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none" fill="none">
+      <path d="M0,80 L0,55 L60,42 L120,50 L200,30 L280,45 L350,25 L420,38 L500,18 L560,35 L620,22 L700,40 L780,28 L840,38 L920,20 L980,32 L1060,42 L1120,35 L1200,45 L1200,80 Z" fill="#1a1208" opacity="0.6"/>
+      <path d="M0,80 L0,60 L80,50 L160,55 L240,40 L320,52 L400,35 L480,48 L560,30 L640,45 L720,38 L800,50 L880,42 L960,48 L1040,36 L1120,50 L1200,55 L1200,80 Z" fill="#1a1208"/>
     </svg>
   </div>
 </div>
@@ -491,9 +574,10 @@
 
   <!-- STEP 1 -->
   <div class="step active" id="step-1">
-    <div class="card">
+    <div class="parchment">
       <h2 class="card-title">Attendee Information</h2>
-      <p class="card-subtitle">Tell us about yourself, partner</p>
+      <p class="card-subtitle">Tell us about yourself</p>
+      <div class="title-rule"><span class="star">✦</span></div>
 
       <div class="grid2">
         <div class="field">
@@ -564,9 +648,10 @@
 
   <!-- STEP 2 -->
   <div class="step" id="step-2">
-    <div class="card">
+    <div class="parchment">
       <h2 class="card-title">Select Your Ticket</h2>
       <p class="card-subtitle">Choose the experience that's right for you</p>
+      <div class="title-rule"><span class="star">✦</span></div>
 
       <div id="ticket-error"></div>
 
@@ -622,9 +707,10 @@
 
   <!-- STEP 3 -->
   <div class="step" id="step-3">
-    <div class="card">
+    <div class="parchment">
       <h2 class="card-title">Review Your Order</h2>
-      <p class="card-subtitle">Make sure everything looks right before you saddle up</p>
+      <p class="card-subtitle">Make sure everything looks right</p>
+      <div class="title-rule"><span class="star">✦</span></div>
 
       <div class="review-section">
         <div class="review-header">Attendee</div>
@@ -650,18 +736,18 @@
   <!-- SUCCESS -->
   <div class="step" id="step-success">
     <div class="success-wrap">
-      <div class="success-card">
-        <svg class="success-longhorn" width="64" height="30" viewBox="0 0 48 22" fill="none">
-          <path d="M24 18C24 18 22 14 22 11C22 8 23 6 24 5C25 6 26 8 26 11C26 14 24 18 24 18Z" fill="currentColor" opacity="0.5"/>
-          <path d="M22 11C22 8 20 5 16 3C12 1 6 1 1 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <path d="M26 11C26 8 28 5 32 3C36 1 42 1 47 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <div class="success-parchment">
+        <svg class="success-longhorn" width="64" height="30" viewBox="0 0 52 24" fill="none">
+          <path d="M26 20C26 20 24 15 24 12C24 8 25 6 26 5C27 6 28 8 28 12C28 15 26 20 26 20Z" fill="currentColor" opacity="0.5"/>
+          <path d="M24 12C24 8 21 5 17 3C13 1 6 1 1 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M28 12C28 8 31 5 35 3C39 1 46 1 51 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
         </svg>
         <div class="success-icon">✓</div>
         <h2 class="success-title">You're Registered!</h2>
         <p class="success-text">A confirmation has been sent to <strong id="success-email"></strong></p>
         <p class="success-sub">We'll see you in Austin, Texas at Fuse 2026.</p>
         <div class="success-divider"></div>
-        <p style="font-size:14px;color:#8b7355;">Order Total: <span class="success-amount" id="success-total"></span></p>
+        <p style="font-size:14px;color:#6a5030;">Order Total: <span class="success-amount" id="success-total"></span></p>
       </div>
     </div>
   </div>
@@ -675,21 +761,13 @@
 </div>
 
 <script>
-  let state = {
-    step: 1,
-    ticket: null,
-    ticketPrice: 0,
-    ticketName: '',
-    addons: {},
-  };
+  let state = { step: 1, ticket: null, ticketPrice: 0, ticketName: '', addons: {} };
 
   function goToStep(n) {
     document.getElementById('step-' + state.step).classList.remove('active');
     state.step = n;
     document.getElementById('step-' + state.step).classList.add('active');
-    updateProgress();
-    updateStrip();
-    window.scrollTo(0,0);
+    updateProgress(); updateStrip(); window.scrollTo(0,0);
   }
 
   function updateProgress() {
@@ -708,30 +786,15 @@
 
   function goToStep2() {
     let valid = true;
-    const fields = [
-      { id: 'firstName', msg: 'Required' },
-      { id: 'lastName', msg: 'Required' },
-      { id: 'phone', msg: 'Required' },
-      { id: 'company', msg: 'Required' },
-      { id: 'gender', msg: 'Required' },
-      { id: 'fuseCount', msg: 'Required' },
-    ];
-    fields.forEach(f => {
-      const el = document.getElementById(f.id);
-      const err = document.getElementById('err-' + f.id);
+    [{ id:'firstName',msg:'Required' },{ id:'lastName',msg:'Required' },{ id:'phone',msg:'Required' },{ id:'company',msg:'Required' },{ id:'gender',msg:'Required' },{ id:'fuseCount',msg:'Required' }].forEach(f => {
+      const el = document.getElementById(f.id), err = document.getElementById('err-' + f.id);
       if (!el.value.trim()) { err.textContent = f.msg; el.classList.add('error'); valid = false; }
       else { err.textContent = ''; el.classList.remove('error'); }
     });
-    const email = document.getElementById('email');
-    const errEmail = document.getElementById('err-email');
-    if (!email.value.trim() || !/\S+@\S+\.\S+/.test(email.value)) {
-      errEmail.textContent = 'Valid email required'; email.classList.add('error'); valid = false;
-    } else { errEmail.textContent = ''; email.classList.remove('error'); }
-
-    if (valid) {
-      updateWmnAddon();
-      goToStep(2);
-    }
+    const email = document.getElementById('email'), errEmail = document.getElementById('err-email');
+    if (!email.value.trim() || !/\S+@\S+\.\S+/.test(email.value)) { errEmail.textContent = 'Valid email required'; email.classList.add('error'); valid = false; }
+    else { errEmail.textContent = ''; email.classList.remove('error'); }
+    if (valid) { updateWmnAddon(); goToStep(2); }
   }
 
   function updateWmnAddon() {
@@ -739,24 +802,13 @@
     const wmnCard = document.getElementById('addon-wmn');
     if (gender !== 'female') {
       wmnCard.classList.add('locked');
-      if (state.addons['wmn']) {
-        delete state.addons['wmn'];
-        const check = document.getElementById('check-wmn');
-        check.innerHTML = '<div class="check-empty"></div>';
-        wmnCard.classList.remove('selected');
-      }
-    } else {
-      wmnCard.classList.remove('locked');
-    }
+      if (state.addons['wmn']) { delete state.addons['wmn']; document.getElementById('check-wmn').innerHTML = '<div class="check-empty"></div>'; wmnCard.classList.remove('selected'); }
+    } else { wmnCard.classList.remove('locked'); }
   }
 
   function selectTicket(id, price, name) {
-    if (state.ticket) {
-      document.getElementById('ticket-' + state.ticket).classList.remove('selected');
-    }
-    state.ticket = id;
-    state.ticketPrice = price;
-    state.ticketName = name;
+    if (state.ticket) document.getElementById('ticket-' + state.ticket).classList.remove('selected');
+    state.ticket = id; state.ticketPrice = price; state.ticketName = name;
     document.getElementById('ticket-' + id).classList.add('selected');
     document.getElementById('ticket-error').innerHTML = '';
     updateStrip();
@@ -766,72 +818,45 @@
     const card = document.getElementById('addon-' + id);
     if (card.classList.contains('locked')) return;
     const check = document.getElementById('check-' + id);
-    if (state.addons[id]) {
-      delete state.addons[id];
-      check.innerHTML = '<div class="check-empty"></div>';
-      card.classList.remove('selected');
-    } else {
-      state.addons[id] = { price, name };
-      check.innerHTML = '<div class="checkmark">✓</div>';
-      card.classList.add('selected');
-    }
+    if (state.addons[id]) { delete state.addons[id]; check.innerHTML = '<div class="check-empty"></div>'; card.classList.remove('selected'); }
+    else { state.addons[id] = { price, name }; check.innerHTML = '<div class="checkmark">✓</div>'; card.classList.add('selected'); }
     updateStrip();
   }
 
-  function getTotal() {
-    let t = state.ticketPrice;
-    Object.values(state.addons).forEach(a => t += a.price);
-    return t;
-  }
+  function getTotal() { let t = state.ticketPrice; Object.values(state.addons).forEach(a => t += a.price); return t; }
 
   function updateStrip() {
     const strip = document.getElementById('summary-strip');
     if (state.step === 2 && state.ticket) {
-      const addonCount = Object.keys(state.addons).length;
-      const addonText = addonCount > 0 ? ` + ${addonCount} add-on${addonCount > 1 ? 's' : ''}` : '';
-      document.getElementById('summary-text').textContent = state.ticketName + addonText;
+      const ac = Object.keys(state.addons).length;
+      document.getElementById('summary-text').textContent = state.ticketName + (ac > 0 ? ` + ${ac} add-on${ac > 1 ? 's' : ''}` : '');
       document.getElementById('summary-total').textContent = '$' + getTotal().toLocaleString();
       strip.style.display = 'flex';
-    } else {
-      strip.style.display = 'none';
-    }
+    } else { strip.style.display = 'none'; }
   }
 
   function goToStep3() {
-    if (!state.ticket) {
-      document.getElementById('ticket-error').innerHTML = '<div class="error-banner">Please select a ticket type</div>';
-      return;
-    }
-    buildReview();
-    goToStep(3);
+    if (!state.ticket) { document.getElementById('ticket-error').innerHTML = '<div class="error-banner">Please select a ticket type</div>'; return; }
+    buildReview(); goToStep(3);
   }
 
   function buildReview() {
-    const gender = document.getElementById('gender');
-    const genderMap = { male: 'Male', female: 'Female', prefer_not: 'Prefer not to say' };
-    const fuseMap = { first: 'This is my first Fuse' };
-    const fuseVal = document.getElementById('fuseCount').value;
-    const preferred = document.getElementById('preferredName').value;
-
-    let attendeeRows = [
+    const genderMap = { male:'Male', female:'Female', prefer_not:'Prefer not to say' };
+    const fuseMap = { first:'This is my first Fuse' };
+    const fv = document.getElementById('fuseCount').value, pn = document.getElementById('preferredName').value;
+    let rows = [
       ['Name', document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value],
-      preferred ? ['Badge Name', preferred] : null,
+      pn ? ['Badge Name', pn] : null,
       ['Email', document.getElementById('email').value],
       ['Phone', document.getElementById('phone').value],
       ['Company', document.getElementById('company').value],
-      ['Gender', genderMap[gender.value] || gender.value],
-      ['Fuse Events Attended', fuseMap[fuseVal] || fuseVal],
+      ['Gender', genderMap[document.getElementById('gender').value] || document.getElementById('gender').value],
+      ['Fuse Events Attended', fuseMap[fv] || fv],
     ].filter(Boolean);
-
-    document.getElementById('review-attendee').innerHTML = attendeeRows.map(([l,v]) =>
-      `<div class="review-row"><span class="review-label">${l}</span><span class="review-value">${v}</span></div>`
-    ).join('');
-
-    let orderHTML = `<div class="order-line"><span>${state.ticketName}</span><span class="order-line-price">$${state.ticketPrice.toLocaleString()}</span></div>`;
-    Object.values(state.addons).forEach(a => {
-      orderHTML += `<div class="order-line"><span>${a.name}</span><span class="order-line-price">${a.price === 0 ? 'FREE' : '$' + a.price.toLocaleString()}</span></div>`;
-    });
-    document.getElementById('review-order').innerHTML = orderHTML;
+    document.getElementById('review-attendee').innerHTML = rows.map(([l,v]) => `<div class="review-row"><span class="review-label">${l}</span><span class="review-value">${v}</span></div>`).join('');
+    let oh = `<div class="order-line"><span>${state.ticketName}</span><span class="order-line-price">$${state.ticketPrice.toLocaleString()}</span></div>`;
+    Object.values(state.addons).forEach(a => { oh += `<div class="order-line"><span>${a.name}</span><span class="order-line-price">${a.price === 0 ? 'FREE' : '$' + a.price.toLocaleString()}</span></div>`; });
+    document.getElementById('review-order').innerHTML = oh;
     document.getElementById('review-total').textContent = '$' + getTotal().toLocaleString();
   }
 
